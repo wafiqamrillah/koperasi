@@ -17,9 +17,10 @@ return new class extends Migration
             $table->id();
             $table->integer('sort')->default(0);
             $table->string('label', 100);
-            $table->enum('link_type', ['url', 'route'])->default('url');
+            $table->enum('link_type', ['url', 'route'])->default('url')->comment("{ url : for no Laravel route generator, route : for Laravel routes }");
             $table->string('link')->default('#');
             $table->string('icon_class', 100)->nullable();
+            $table->boolean('has_translation')->default(false);
             $table->boolean('is_active')->default(false);
             $table->timestamps();
         });
