@@ -16,5 +16,7 @@ class Setting extends Model
         "value",
     ];
 
-    protected $guarded = [];
+    protected $guarded = [
+        "key"
+    ];
 }

@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
+            $table->string('key')->index();
             $table->string('title');
             $table->text('description')->nullable();
             $table->boolean('has_translation')->default(false);
