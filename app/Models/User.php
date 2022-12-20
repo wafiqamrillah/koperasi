@@ -42,4 +42,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the user that owns the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function employee()
+    {
+        return $this->belongsTo(\App\Models\Hris\Employee::class, 'employee_id');
+    }
+
+    /**
+     * Get the member that owns the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function member()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'member_id');
+    }
 }
