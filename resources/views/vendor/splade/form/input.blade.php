@@ -5,18 +5,18 @@
     v-model="{{ $vueModel() }}"
     #default="inputScope"
 >
-    <label class="block">
+    <div class="form-control">
         @includeWhen($label, 'splade::form.label', ['label' => $label])
-
-        <div class="flex rounded-md border border-gray-300 shadow-sm">
+        
+        <label class="input-group">
             @if($prepend)
-                <span :class="{ 'opacity-50': inputScope.disabled && @json(!$alwaysEnablePrepend) }" class="inline-flex items-center px-3 rounded-l-md border border-t-0 border-b-0 border-l-0 border-gray-300 bg-gray-50 text-gray-500">
+                <span>
                     {!! $prepend !!}
                 </span>
             @endif
 
             <input {{ $attributes->except(['v-if', 'v-show', 'class'])->class([
-                'block w-full border-0 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 disabled:opacity-50 disabled:bg-gray-50 disabled:cursor-not-allowed',
+                'block w-full input input-bordered',
                 'rounded-md' => !$append && !$prepend,
                 'min-w-0 flex-1 rounded-none' => $append || $prepend,
                 'rounded-l-md' => $append && !$prepend,
@@ -30,12 +30,12 @@
             />
 
             @if($append)
-                <span :class="{ 'opacity-50': inputScope.disabled && @json(!$alwaysEnableAppend) }" class="inline-flex items-center px-3 rounded-r-md border border-t-0 border-b-0 border-r-0 border-gray-300 bg-gray-50 text-gray-500">
+                <span>
                     {!! $append !!}
                 </span>
             @endif
-        </div>
-    </label>
+        </label>
+    </div>
 
     @include('splade::form.help', ['help' => $help])
     @includeWhen($showErrors, 'splade::form.error', ['name' => $validationKey()])

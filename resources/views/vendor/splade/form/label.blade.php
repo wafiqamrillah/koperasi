@@ -1,1 +1,3 @@
-<span class="block mb-1 text-gray-700 font-sans">{{ $label }}</span>
+<label class="label">
+    <span class="label-text">{{ $label }}</span>
+</label>
