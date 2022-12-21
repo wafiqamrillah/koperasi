@@ -1,8 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    plugins: [
-        require('daisyui')
-    ],
     content: [
         "./vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php",
         "./vendor/protonemedia/laravel-splade/lib/**/*.vue",
@@ -18,6 +15,21 @@ module.exports = {
 
     plugins: [
         require("@tailwindcss/forms"),
-        require("@tailwindcss/typography")
+        require("@tailwindcss/typography"),
+        require('daisyui')
     ],
+
+    daisyui: {
+        styled: true,
+        theme: true,
+        themes: [
+            "corporate"
+        ],
+        base: true,
+        utils: true,
+        logs: true,
+        rtl: false,
+        prefix: "",
+        darkTheme: "dark",
+    },
 };
