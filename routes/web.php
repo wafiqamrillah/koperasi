@@ -22,7 +22,7 @@ Route::middleware('splade')->group(function () {
     Route::spladeUploads();
 
     Route::get('/', function () {
-        return view('welcome');
+        return redirect()->route('dashboard');
     });
 
     Route::middleware('auth')->group(function () {
