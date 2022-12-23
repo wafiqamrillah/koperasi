@@ -1,6 +1,7 @@
 {{-- <nav class="fixed top-0 navbar bg-base-100 shadow z-10"> --}}
 <nav class="fixed top-0 h-16 w-full bg-gray-50 border-b border-gray-100 shadow z-20 flex items-center justify-between">
-    <div>
+    <div class="flex items-center space-y-3">
+        <!-- Drawer Menu -->
         <button
             type="button"
             @click.prevent="toggle"
@@ -9,7 +10,8 @@
             <i class="fa-solid fa-bars"></i>
         </button>
     </div>
-    <div>
+    <div class="flex flex-row-reverse items-center space-y-3">
+        <!-- Profile -->
         <x-dropdown placement="bottom-end">
             <x-slot name="trigger">
                 <button type="button" tabindex="0" class="btn btn-ghost btn-circle avatar">
