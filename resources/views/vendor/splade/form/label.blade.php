@@ -1,3 +1,1 @@
-<label class="label">
-    <span class="label-text">{{ $label }}</span>
-</label>
+<label {{ $attributes->only(['for', 'id']) }}>{{ $label }}</label>

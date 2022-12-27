@@ -1,25 +1,60 @@
-<x-guest-layout>
-    <x-auth-card>
-        <!-- Session Status -->
-        <x-auth-session-status class="mb-4" />
-
-        <x-splade-form action="{{ route('login') }}" class="space-y-4">
-            <!-- Email Address -->
-            <x-splade-input id="email" type="email" name="email" :label="__('Email')" required autofocus />
-            <x-splade-input id="password" type="password" name="password" :label="__('Password')" required autocomplete="current-password" />
-            <div class="w-1/2">
-                <x-splade-checkbox id="remember_me" name="remember" :label="__('Remember me')" class="checkbox-primary checkbox-xs" />
+<div class="login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <div class="flex items-center justify-center">
+                <Link href="/">
+                    <x-application-logo style="width: 75px; " />
+                </Link>
             </div>
+        </div>
+        
+        
+        <div class="card">
+            <div class="card-body">
+                <!-- Session Status -->
+                <x-auth-session-status class="mb-4" />
+                
+                <x-splade-form action="{{ route('login') }}" class="space-y-4">
+                    <!-- Email Address -->
+                    <x-splade-input
+                        id="email"
+                        type="email"
+                        name="email"
+                        :label="__('Email')"
+                        :placeholder="__('Email')"
+                        required
+                        autofocus
+                        prepend='<span class="input-group-text">@</span>' />
 
-            <div class="flex items-center justify-end">
-                @if (Route::has('password.request'))
-                    <Link class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </Link>
-                @endif
+                    <!-- Password -->
+                    <x-splade-input
+                        id="password"
+                        type="password"
+                        name="password"
+                        :label="__('Password')"
+                        :placeholder="__('Password')"
+                        required
+                        autocomplete="current-password"
+                        prepend='<span class="input-group-text"><i class="fa-solid fa-lock" /></span>' />
 
-                <x-splade-submit class="ml-3" :label="__('Log in')" />
+                    <div class="row">
+                        <div class="col-8">
+                            <x-splade-checkbox id="remember_me" name="remember" :label="__('Remember me')" class="checkbox-primary checkbox-xs" />
+                        </div>
+                        <div class="col-4">
+                            <x-splade-submit class="ml-3" :label="__('Log in')" />
+                        </div>
+                    </div>
+                    
+                    <p class="mb-1">
+                        @if (Route::has('password.request'))
+                        <Link class="text-sm" href="{{ route('password.request') }}">
+                            {{ __('Forgot your password?') }}
+                        </Link>
+                        @endif
+                    </p>
+                </x-splade-form>
             </div>
-        </x-splade-form>
-    </x-auth-card>
-</x-guest-layout>
+        </div>
+    </div>
+</div>

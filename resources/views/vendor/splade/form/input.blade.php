@@ -1,42 +1,39 @@
 <SpladeInput
-    {{ $attributes->only(['v-if', 'v-show', 'class'])->class(['hidden' => $isHidden()]) }}
-    :flatpickr="@js($flatpickrOptions())"
-    :js-flatpickr-options="{!! $jsFlatpickrOptions !!}"
-    v-model="{{ $vueModel() }}"
-    #default="inputScope"
+{{ $attributes->only(['v-if', 'v-show', 'class'])->class(['hidden' => $isHidden()]) }}
+:flatpickr="@js($flatpickrOptions())"
+:js-flatpickr-options="{!! $jsFlatpickrOptions !!}"
+v-model="{{ $vueModel() }}"
+#default="inputScope"
 >
-    <div class="form-control">
-        @includeWhen($label, 'splade::form.label', ['label' => $label])
-        
-        <label class="input-group">
-            @if($prepend)
-                <span>
-                    {!! $prepend !!}
-                </span>
-            @endif
+@includeWhen($label, 'splade::form.label', ['label' => $label])
 
-            <input {{ $attributes->except(['v-if', 'v-show', 'class'])->class([
-                'block w-full input input-bordered',
-                'rounded-md' => !$append && !$prepend,
-                'min-w-0 flex-1 rounded-none' => $append || $prepend,
-                'rounded-l-md' => $append && !$prepend,
-                'rounded-r-md' => !$append && $prepend,
+<div class="{{ ($prepend || $append) ? "input-group" : "form-group" }} mb-3">
+    @if ($prepend)
+        <div class="input-group-prepend">
+            {!! $prepend !!}
+        </div>
+    @endif
+
+    <input
+        {{ 
+            $attributes->except(['v-if', 'v-show', 'class'])->class([
+                'form-control',
             ])->merge([
                 'name' => $name,
                 'type' => $type,
                 'v-model' => $flatpickrOptions() ? null : $vueModel(),
                 'data-validation-key' => $validationKey(),
-            ]) }}
-            />
+            ])
+        }}
+        />
 
-            @if($append)
-                <span>
-                    {!! $append !!}
-                </span>
-            @endif
-        </label>
-    </div>
+    @if ($append)
+        <div class="input-group-append">
+            {!! $append !!}
+        </div>
+    @endif
+</div>
 
-    @include('splade::form.help', ['help' => $help])
-    @includeWhen($showErrors, 'splade::form.error', ['name' => $validationKey()])
+@include('splade::form.help', ['help' => $help])
+@includeWhen($showErrors, 'splade::form.error', ['name' => $validationKey()])
 </SpladeInput>
