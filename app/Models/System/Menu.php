@@ -37,4 +37,20 @@ class Menu extends Model
     {
         return $this->hasMany(Menu::class, 'parent_id', 'id');
     }
+
+    // Scopes
+        public function scopeActive($query)
+        {
+            return $query->where('is_active', true);
+        }
+
+        public function scopeMainMenu($query)
+        {
+            return $query->whereNull('parent_id')->orWhere('parent_id', 0);
+        }
+
+        public function scopeOrderSort($query, $order = 'asc')
+        {
+            return $query->orderBy('sort', $order);
+        }
 }

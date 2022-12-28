@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-theme="corporate">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,7 +14,7 @@
         @vite(['resources/js/app.js', 'resources/sass/app.scss'])
         @spladeHead
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased" style="position: relative;">
         @splade
     </body>
 </html>
