@@ -10,7 +10,7 @@
         <!-- Notifications -->
         <x-splade-toggle>
             <li class="nav-item dropdown">
-                <div class="nav-link" data-toggle="dropdown" aria-expanded="true" @click.prevent="toggle">
+                <div class="nav-link" data-toggle="dropdown" :aria-expanded="!toggled" @click.prevent="toggle">
                     <i class="fa-regular fa-bell"></i>
                     @if (auth()->user()->unreadNotifications->count() > 0)
                     <span class="badge badge-warning navbar-badge">
@@ -39,61 +39,39 @@
                 </div>
             </li>
         </x-splade-toggle>
-    </ul>
-    {{-- <div class="flex items-center space-x-3">
-        <x-dropdown placement="bottom-end" width="96">
-            <x-slot name="trigger">
-                <button type="button" tabindex="0" class="btn btn-ghost btn-circle">
-                    <div class="indicator">
-                        <i class="fa-regular fa-bell text-lg"></i>
-                        @if (auth()->user()->unreadNotifications->count() > 0)
-                        <span class="badge badge-sm badge-primary rounded-full indicator-item text-xs">
-                            {{ auth()->user()->unreadNotifications->count() <= 9 ? auth()->user()->unreadNotifications->count() : "9+" }}
-                        </span>
-                        @endif
-                    </div>
-                </button>
-            </x-slot>
-            
-            <x-slot name="content">
-                <ul class="divide-y divide-gray-200 max-h-[47vh] overflow-hidden overflow-y-auto">
-                    @forelse (auth()->user()->unreadNotifications as $notification)
-                    <li class="p-4 hover:bg-gray-200 hover:cursor-pointer text-sm text-gray-800">
-                        A
+        <!-- User Menu -->
+        <x-splade-toggle>
+            <li class="nav-item dropdown user-menu">
+                <div class="nav-link" data-toggle="dropdown" :aria-expanded="!toggled" @click.prevent="toggle">
+                    <img src="https://placeimg.com/80/80/people" class="user-image img-circle elevation-2" alt="User Image" />
+                    <span class="d-none d-md-inline">
+                        {{ auth()->user()->name }}
+                    </span>
+                </div>
+                <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;" :class="{ 'show' : toggled }">
+                    <li class="user-header bg-primary">
+                        <img src="https://placeimg.com/80/80/people" class="img-circle elevation-2" alt="User Image">
+                        <p>
+                            <span class="text-sm">{{ auth()->user()->name }}</span>
+                            <small>Web Developer</small>
+                            <small>Member since Nov. 2012</small>
+                        </p>
                     </li>
-                    @empty
-                    <li class="p-4 text-center text-sm text-gray-400">
-                        {{ __('There is no notification') }}
-                    </li>
-                    @endforelse
-                </ul>
-            </x-slot>
-        </x-dropdown>
-        
-        <!-- Profile -->
-        <x-dropdown placement="bottom-end">
-            <x-slot name="trigger">
-                <button type="button" tabindex="0" class="btn btn-ghost btn-circle avatar online">
-                    <div class="w-10 rounded-full">
-                        <img src="https://placeimg.com/80/80/people" />
-                    </div>
-                </button>
-            </x-slot>
-            
-            <x-slot name="content">
-                <x-dropdown-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
-                </x-dropdown-link>
-                
-                <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
                     
-                    <x-dropdown-link as="a" :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">
-                        {{ __('Log Out') }}
-                    </x-dropdown-link>
-                </form>
-            </x-slot>
-        </x-dropdown>
-    </div> --}}
+                    <li class="user-footer">
+                        <Link href="{{ route('profile.edit') }}" class="btn btn-default btn-flat">
+                            {{ __('Profile') }}
+                        </Link>
+                        <form action="{{ route('logout') }}" method="POST" class="float-right">
+                            @csrf
+                            
+                            <Link href="{{ route('logout') }}" class="btn btn-default btn-flat" onclick="event.preventDefault(); this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                            </Link>
+                        </form>
+                    </li>
+                </ul>
+            </li>
+        </x-splade-toggle>
+    </ul>
 </nav>
