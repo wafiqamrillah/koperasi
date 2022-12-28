@@ -16,7 +16,7 @@ v-model="{{ $vueModel() }}"
 
     <input
         {{ 
-            $attributes->except(['v-if', 'v-show', 'class'])->class([
+            $attributes->except(['v-if', 'v-show'])->class([
                 'form-control',
             ])->merge([
                 'name' => $name,
