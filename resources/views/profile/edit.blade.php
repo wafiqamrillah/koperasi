@@ -47,12 +47,20 @@
                                     {{ __('Edit Profile Information') }}
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" :class="{ 'active' : data.tab === 'change-password' }" href="#edit-profile-information" data-toggle="tab" @click.prevent="data.tab = 'change-password'">
+                                    {{ __('Change Password') }}
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <div class="card-body">
                         <div class="tab-content">
                             <div class="tab-pane" :class="{ 'active' : data.tab === 'edit-profile-information' }" id="edit-profile-information" dusk="update-profile-information">
                                 @include('profile.partials.update-profile-information-form')
+                            </div>
+                            <div class="tab-pane" :class="{ 'active' : data.tab === 'change-password' }" id="change-password" dusk="update-password">
+                                @include('profile.partials.update-password-form')
                             </div>
                         </div>
                     </div>
@@ -63,12 +71,6 @@
     </div>
     
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">        
-        <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-            <div class="max-w-xl" dusk="update-password">
-                @include('profile.partials.update-password-form')
-            </div>
-        </div>
-        
         <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
             <div class="max-w-xl" dusk="delete-user">
                 @include('profile.partials.delete-user-form')

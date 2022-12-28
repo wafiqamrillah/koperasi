@@ -23,12 +23,15 @@
         </div>
     @endif
     <div class="form-group row">
-        <x-splade-submit :label="__('Save')" />
-
-        @if (session('status') === 'profile-updated')
-            <p class="text-sm text-success">
-                {{ __('Saved.') }}
-            </p>
-        @endif
+        <div class="col-6">
+            <x-splade-submit :label="__('Save')" />
+        </div>
+        <div class="col-6 d-flex" style="align-items: center;">
+            @if (session('status') === 'profile-updated')
+                <span class="text-sm text-success">
+                    {{ __('Saved.') }}
+                </span>
+            @endif
+        </div>
     </div>
 </x-splade-form>
