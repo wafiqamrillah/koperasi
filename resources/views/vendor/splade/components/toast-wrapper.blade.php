@@ -6,22 +6,36 @@
             appear
             show="toasts.hasBackdrop"
             class="fixed z-30 inset-0 bg-black/75"
+            style="position: fixed; z-index: 30; top: 0px; right: 0px; bottom: 0px; left: 0px; background-color: rgb(0, 0, 0, .75);"
         />
 
-        <div class="fixed z-40 inset-0 grid grid-cols-3 grid-flow-row-3 pointer-events-none">
-            <div v-for="position in toasts.positions" class="relative">
-                <div :class="{
-                    'absolute w-full h-full flex flex-col p-4 space-y-4': true,
-                    'items-start justify-start': position == 'left-top',
-                    'items-center justify-start': position == 'center-top',
-                    'items-end justify-start': position == 'right-top',
-                    'items-start justify-center': position == 'left-center',
-                    'items-center justify-center': position == 'center-center',
-                    'items-end justify-center': position == 'right-center',
-                    'items-start justify-end': position == 'left-bottom',
-                    'items-center justify-end': position == 'center-bottom',
-                    'items-end justify-end': position == 'right-bottom'
-                }">
+        <div
+            style="
+                position: fixed;
+                z-index: 40;
+                top: 0px;
+                right: 0px;
+                bottom: 0px;
+                left: 0px;
+                display: grid;
+                grid-template-columns: repeat(1, minmax(0, 1fr));
+                grid-auto-flow: row;
+                pointer-events: none;
+            ">
+            <div v-for="position in toasts.positions" style="position: relative">
+                <div :style="{
+                        'position: absolute; width: 100%; height: 100%; display: flex; flex-direction: column; padding: 1rem; margin-top: 1rem;' : true,
+                        'align-items: flex-start; justify-content: flex-start;': position == 'left-top',
+                        'align-items: center; justify-content: flex-start;': position == 'center-top',
+                        'align-items: flex-end; justify-content: flex-start;': position == 'right-top',
+                        'align-items: flex-start; justify-content: center;': position == 'left-center',
+                        'align-items: center; justify-content: center;': position == 'center-center',
+                        'align-items: flex-end; justify-content: center;': position == 'right-center',
+                        'align-items: flex-start; justify-content: flex-end;': position == 'left-bottom',
+                        'align-items: center; justify-content: flex-end;': position == 'center-bottom',
+                        'align-items: flex-end; justify-content: flex-end;': position == 'right-bottom'
+                    }"
+                >
                     <template v-for="(toast, toastKey) in toasts.toasts">
                         <template v-if="toast.position == position && !toast.dismissed && toast.html">
                             <SpladeRender
