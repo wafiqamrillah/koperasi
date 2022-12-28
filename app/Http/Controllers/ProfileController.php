@@ -19,6 +19,7 @@ class ProfileController extends Controller
     {
         return view('profile.edit', [
             'user' => $request->user(),
+            'tab' => $request->tab ?? "edit-profile-information"
         ]);
     }
 
