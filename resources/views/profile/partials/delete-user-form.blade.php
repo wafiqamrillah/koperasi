@@ -1,41 +1,39 @@
-<section class="space-y-6">
-    <header>
-        <h2 class="text-lg font-medium text-gray-900">
+<section>
+    <p>
+        {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.') }}
+    </p>
+
+    <div class="row">
+        <Link href="#confirm-user-deletion" dusk="open-delete-modal" class="btn btn-danger">
             {{ __('Delete Account') }}
-        </h2>
-
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.') }}
-        </p>
-    </header>
-
-    <Link href="#confirm-user-deletion" dusk="open-delete-modal" class="inline-flex rounded-md shadow-sm bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline">
-        {{ __('Delete Account') }}
-    </Link>
+        </Link>
+    </div>
 
     <x-splade-modal name="confirm-user-deletion">
         <x-splade-form dusk="confirm-user-deletion" method="delete" :action="route('profile.destroy')">
-            <h2 class="text-lg font-medium text-gray-900">
-                {{ __('Are you sure you want to delete your account?') }}
-            </h2>
-
-            <p class="mt-1 text-sm text-gray-600">
-                {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
-            </p>
-
-            <div class="mt-6">
+            <div class="modal-header">
+                <h2 class="text-lg font-medium text-gray-900">
+                    {{ __('Are you sure you want to delete your account?') }}
+                </h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" dusk="close-modal-button" @click="modal.close" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="mt-1 text-sm text-gray-600">
+                    {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
+                </p>
                 <x-splade-input id="password" name="password" type="password"  :placeholder="__('Password')" />
             </div>
-
-            <div class="mt-6 flex justify-end">
-                <button type="button" @click.prevent="modal.close" class="inline-flex rounded-md shadow-sm border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 font-bold py-2 px-4 focus:outline-none focus:shadow-outline">
+            <div class="modal-footer justify-content-between">
+                <button type="button" @click.prevent="modal.close" class="btn btn-default">
                     {{ __('Cancel') }}
                 </button>
 
-                <button dusk="confirm-delete-account" type="submit" class="ml-3 inline-flex rounded-md shadow-sm bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline">
+                <button dusk="confirm-delete-account" type="submit" class="btn btn-danger">
                     {{ __('Delete Account') }}
                 </button>
             </div>
         </x-splade-form>
-    </x-modal>
+    </x-splade-modal>
 </section>

@@ -19,7 +19,6 @@
                 </div>
             </div>
             
-            
             <div class="card card-primary">
                 <div class="card-header">
                     <h3 class="card-title">
@@ -34,7 +33,6 @@
                     </p>
                 </div>
             </div>
-            
         </div>
         
         <div class="col-md-9">
@@ -48,8 +46,13 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" :class="{ 'active' : data.tab === 'change-password' }" href="#edit-profile-information" data-toggle="tab" @click.prevent="data.tab = 'change-password'">
+                                <a class="nav-link" :class="{ 'active' : data.tab === 'change-password' }" href="#change-password" data-toggle="tab" @click.prevent="data.tab = 'change-password'">
                                     {{ __('Change Password') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" :class="{ 'active' : data.tab === 'delete-user' }" href="#delete-user" data-toggle="tab" @click.prevent="data.tab = 'delete-user'">
+                                    {{ __('Delete User') }}
                                 </a>
                             </li>
                         </ul>
@@ -62,19 +65,13 @@
                             <div class="tab-pane" :class="{ 'active' : data.tab === 'change-password' }" id="change-password" dusk="update-password">
                                 @include('profile.partials.update-password-form')
                             </div>
+                            <div class="tab-pane" :class="{ 'active' : data.tab === 'delete-user' }" id="delete-user" dusk="delete-user">
+                                @include('profile.partials.delete-user-form')
+                            </div>
                         </div>
                     </div>
                 </div>
             </x-splade-data>
-        </div>
-        
-    </div>
-    
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">        
-        <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-            <div class="max-w-xl" dusk="delete-user">
-                @include('profile.partials.delete-user-form')
-            </div>
         </div>
     </div>
 </x-app-layout>
