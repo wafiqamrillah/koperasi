@@ -59,14 +59,18 @@
                     </li>
                     
                     <li class="user-footer">
-                        <Link href="{{ route('profile.edit') }}" class="btn btn-default btn-flat">
-                            {{ __('Profile') }}
+                        <Link href="{{ route('profile.edit') }}">
+                            <button type="button" class="btn btn-default">
+                                {{ __('Profile') }}
+                            </button>
                         </Link>
                         <form action="{{ route('logout') }}" method="POST" class="float-right">
                             @csrf
                             
-                            <Link href="{{ route('logout') }}" class="btn btn-default btn-flat" onclick="event.preventDefault(); this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                            <Link href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">
+                                <button type="button" class="btn btn-default">
+                                    {{ __('Log Out') }}
+                                </button>
                             </Link>
                         </form>
                     </li>
