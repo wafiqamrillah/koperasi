@@ -3,8 +3,9 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
+use ProtoneMedia\Splade\Components\PersistentComponent;
 
-class AppLayout extends Component
+class AppLayout extends PersistentComponent
 {
     /**
      * Get the view / contents that represents the component.
