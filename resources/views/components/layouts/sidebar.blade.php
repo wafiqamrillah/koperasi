@@ -9,7 +9,7 @@
     <div class="sidebar" style="overflow-y: auto; margin-top: 0;">
         <div class="user-panel my-3 pb-3 d-flex">
             <div class="image">
-                <img src="https://placeimg.com/80/80/people" class="img-circle elevation-2" alt="User Image" />
+                <img src="{{ auth()->user()->profile_photo_url }}" class="img-circle elevation-2" alt="User Image" />
             </div>
             <div class="info">
                 <Link href="{{ route('profile.edit') }}" class="d-block">

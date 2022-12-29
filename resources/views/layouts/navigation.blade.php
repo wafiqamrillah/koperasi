@@ -44,14 +44,14 @@
         <x-splade-toggle>
             <li class="nav-item dropdown user-menu">
                 <div class="nav-link" data-toggle="dropdown" :aria-expanded="!toggled" @click.prevent="toggle">
-                    <img src="https://placeimg.com/80/80/people" class="user-image img-circle elevation-2" alt="User Image" />
+                    <img src="{{ auth()->user()->profile_photo_url }}" class="user-image img-circle elevation-2" alt="User Image" />
                     <span class="d-none d-md-inline">
                         {{ auth()->user()->name }}
                     </span>
                 </div>
                 <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;" :class="{ 'show' : toggled }" @click.prevent="toggle">
                     <li class="user-header bg-primary">
-                        <img src="https://placeimg.com/80/80/people" class="img-circle elevation-2" alt="User Image">
+                        <img src="{{ auth()->user()->profile_photo_url }}" class="img-circle elevation-2" alt="User Image">
                         <p>
                             <span class="text-sm">{{ auth()->user()->name }}</span>
                             <small>Web Developer</small>
