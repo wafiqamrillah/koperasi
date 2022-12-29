@@ -49,7 +49,7 @@
                         {{ auth()->user()->name }}
                     </span>
                 </div>
-                <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;" :class="{ 'show' : toggled }">
+                <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;" :class="{ 'show' : toggled }" @click.prevent="toggle">
                     <li class="user-header bg-primary">
                         <img src="https://placeimg.com/80/80/people" class="img-circle elevation-2" alt="User Image">
                         <p>

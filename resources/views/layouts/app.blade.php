@@ -1,8 +1,8 @@
-<div>
+<div class="tw-relative">
     <x-splade-toggle>
         <div
         class="sidebar-mini control-sidebar-slide-open layout-fixed layout-navbar-fixed layout-footer-fixed"
-        :class="{ 'sidebar-collapse' : !toggled }">
+        :class="{ 'sidebar-collapse sidebar-close' : !toggled, 'sidebar-open' : toggled }">
         <div class="wrapper">
             <!-- Navigation -->
             @include('layouts.navigation')
@@ -55,7 +55,7 @@
             </footer>
             
             <!-- Sidebar Overlay -->
-            <div id="sidebar-overlay"></div>
+            <div id="sidebar-overlay" @click.prevent="setToggle(false)"></div>
         </div>
     </div>
 </x-splade-toggle>    

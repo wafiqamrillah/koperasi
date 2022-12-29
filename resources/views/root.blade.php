@@ -14,7 +14,7 @@
         @vite(['resources/js/app.js', 'resources/sass/app.scss'])
         @spladeHead
     </head>
-    <body class="font-sans antialiased" style="position: relative;">
+    <body class="tw-relative tw-font-sans tw-antialiased">
         @splade
     </body>
 </html>
