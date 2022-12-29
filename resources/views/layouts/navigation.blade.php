@@ -39,6 +39,7 @@
                 </div>
             </li>
         </x-splade-toggle>
+        
         <!-- User Menu -->
         <x-splade-toggle>
             <li class="nav-item dropdown user-menu">

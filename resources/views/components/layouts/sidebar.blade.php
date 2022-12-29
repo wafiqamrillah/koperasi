@@ -12,7 +12,7 @@
                 <img src="https://placeimg.com/80/80/people" class="img-circle elevation-2" alt="User Image" />
             </div>
             <div class="info">
-                <Link href="#" class="d-block">
+                <Link href="{{ route('profile.edit') }}" class="d-block">
                     {{ auth()->user()->name }}
                 </Link>
             </div>
