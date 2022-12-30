@@ -77,6 +77,8 @@ class SettingController extends Controller
      */
     public function edit(Request $request)
     {
+        $this->authorize('viewAny');
+
         $settings = Setting::select(['key', 'title', 'description', 'has_translation', 'value'])
             ->get()
             ->map(function($setting) {
@@ -100,6 +102,8 @@ class SettingController extends Controller
      */
     public function update(Request $request)
     {
+        $this->authorize('update');
+
         try {
             $settings = Setting::get();
 
