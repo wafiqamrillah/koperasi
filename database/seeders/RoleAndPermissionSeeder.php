@@ -36,7 +36,9 @@ class RoleAndPermissionSeeder extends Seeder
                 });
 
                 $roles->each(function($role) use($permissions) {
-                    $role->syncPermissions($permissions);
+                    if (!in_array($role->name, ['developer', 'super user'])) {
+                        $role->syncPermissions($permissions);
+                    }
                 });
             });
         } catch (\Exception $e) {
