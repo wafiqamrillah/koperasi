@@ -10,6 +10,9 @@
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
 
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="{{ config('app.icon') ? asset('storage/' . config('app.icon')) : null }}">
+
         <!-- Scripts -->
         @vite(['resources/js/app.js', 'resources/sass/app.scss'])
         @spladeHead

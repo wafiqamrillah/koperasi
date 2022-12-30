@@ -3,7 +3,11 @@
         <div class="login-logo">
             <div class="flex items-center justify-center">
                 <Link href="/">
-                    <x-application-logo style="width: 75px; " />
+                    @if (config('app.logo'))
+                        <img src="{{ asset('storage/' . config('app.logo')) }}" alt="{{ config('app.name', 'Laravel') }} Logo" style="width: 75px; ">
+                    @else
+                        <x-application-logo style="width: 75px; " />
+                    @endif
                 </Link>
             </div>
         </div>

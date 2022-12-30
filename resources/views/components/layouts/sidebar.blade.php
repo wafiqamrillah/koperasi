@@ -1,9 +1,11 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <Link href="/" class="brand-link">
-        <span class="brand-image elevation-3">
-            <x-application-logo style="width: 35px;" />
-        </span>
-        <span class="brand-text font-weight-light">AdminLTE 3</span>
+        @if ($application_logo)
+            <img src="{{ $application_logo }}" alt="Application Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        @else
+            <x-application-logo style="width: 35px;" class="brand-image elevation-3"/>
+        @endif
+        <span class="brand-text font-weight-light">{{ $application_name }}</span>
     </Link>
     
     <div class="sidebar" style="overflow-y: auto; margin-top: 0;">

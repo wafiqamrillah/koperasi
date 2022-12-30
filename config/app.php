@@ -58,6 +58,20 @@ return [
 
     'asset_url' => env('ASSET_URL'),
 
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Application assets
+    |--------------------------------------------------------------------------
+    |
+    | This other configuration sets the favicon and application logo
+    |
+    */
+
+    'logo' => env('APP_LOGO', null),
+
+    'icon' => env('APP_ICON', null),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
@@ -69,7 +83,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Jakarta',
 
     /*
     |--------------------------------------------------------------------------
@@ -82,7 +96,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'id',
 
     /*
     |--------------------------------------------------------------------------
@@ -108,7 +122,7 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    'faker_locale' => 'id_ID',
 
     /*
     |--------------------------------------------------------------------------
@@ -212,5 +226,4 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
-
 ];

@@ -489,7 +489,7 @@ const ue = {
       createElementVNode("iframe", {
         ref_key: "iframeElement",
         ref: n,
-        class: "bg-white w-full h-full"
+        class: "tw-bg-white tw-w-full tw-h-full"
       }, null, 512)
     ]));
   }

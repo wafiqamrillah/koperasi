@@ -78,5 +78,12 @@
                 </ul>
             </li>
         </x-splade-toggle>
+
+        <!-- Settings -->
+        <li class="nav-item">
+            <Link href="{{ route('settings.edit') }}" class="nav-link">
+                <i class="fa-solid fa-cog"></i>
+            </Link>
+        </li>
     </ul>
 </nav>
