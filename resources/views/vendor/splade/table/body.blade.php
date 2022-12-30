@@ -1,20 +1,20 @@
-<tbody class="divide-y divide-gray-200 bg-white">
+<tbody class="tw-divide-y tw-divide-gray-200 tw-bg-white">
     @foreach($table->resource as $itemKey => $item)
         @php $itemPrimaryKey = $table->findPrimaryKey($item) @endphp
 
         <tr
             @if($table->rowLinks->has($itemKey))
-                class="cursor-pointer"
+                class="tw-cursor-pointer"
                 @click="(event) => table.visit(@js($table->rowLinks->get($itemKey)), @js($table->rowLinkType), event)"
             @endif
             :class="{
-                'bg-gray-50': table.striped && @js($itemKey) % 2,
-                'hover:bg-gray-100': table.striped,
-                'hover:bg-gray-50': !table.striped
+                'tw-bg-gray-50': table.striped && @js($itemKey) % 2,
+                'hover:tw-bg-gray-100': table.striped,
+                'hover:tw-bg-gray-50': !table.striped
             }"
         >
             @if($hasBulkActions = $table->hasBulkActions())
-                <td width="64" class="text-xs px-6 py-4">
+                <td width="64" class="tw-text-xs tw-px-6 tw-py-4">
                     <input
                         @change="(e) => table.setSelectedItem(@js($itemPrimaryKey), e.target.checked)"
                         :checked="table.itemIsSelected(@js($itemPrimaryKey))"
@@ -30,7 +30,7 @@
             @foreach($table->columns() as $column)
                 <td
                     v-show="table.columnIsVisible(@js($column->key))"
-                    class="whitespace-nowrap text-sm @if($loop->first && $hasBulkActions) pr-6 @else px-6 @endif py-4 @if($column->highlight) text-gray-900 font-medium @else text-gray-500 @endif"
+                    class="tw-whitespace-nowrap tw-text-sm {{ $loop->first && $hasBulkActions ? 'tw-pr-6' : 'tw-px-6' }} tw-py-4 {{ $column->highlight ? 'tw-text-gray-900 tw-font-medium' : 'tw-text-gray-500' }}"
                 >
                     @isset(${'spladeTableCell' . $column->keyHash()})
                         {{ ${'spladeTableCell' . $column->keyHash()}($item, $itemKey) }}

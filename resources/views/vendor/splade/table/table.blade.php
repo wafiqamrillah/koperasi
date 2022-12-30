@@ -7,7 +7,7 @@
     :items-on-all-pages="@js($table->totalOnAllPages())"
 >
     <template #default="{!! $scope !!}">
-        <div {{ $attributes->only('class') }} :class="{ 'opacity-50': table.isLoading }">
+        <div {{ $attributes->only('class') }} :class="{ 'tw-opacity-50': table.isLoading }">
             @if($hasControls())
                 @include('splade::table.controls')
             @endif

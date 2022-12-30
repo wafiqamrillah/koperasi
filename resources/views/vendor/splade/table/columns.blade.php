@@ -1,6 +1,6 @@
 <x-splade-component is="button-with-dropdown" dusk="columns-dropdown">
     <x-slot:button>
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
+        <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-5 tw-w-5" viewBox="0 0 20 20" fill="currentColor"
             :class="{
                 'text-gray-400': !table.columnsAreToggled,
                 'text-green-400': table.columnsAreToggled,
@@ -10,21 +10,21 @@
         </svg>
     </x-slot:button>
 
-    <div class="px-2">
-        <ul class="divide-y divide-gray-200">
+    <div class="tw-px-2">
+        <ul class="tw-divide-y tw-divide-gray-200">
             @foreach($table->columns() as $column)
                 @if(!$column->canBeHidden)
                     @continue
                 @endif
 
-                <li class="py-2 flex items-center justify-between">
-                    <p class="text-sm text-gray-900">
+                <li class="tw-py-2 tw-flex tw-items-center tw-justify-between">
+                    <p class="tw-text-sm tw-text-gray-900">
                         {{ $column->label }}
                     </p>
 
                     <button
                         type="button"
-                        class="ml-4 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-blue-500"
+                        class="tw-ml-4 tw-relative tw-inline-flex tw-flex-shrink-0 tw-h-6 tw-w-11 tw-border-2 tw-border-transparent tw-rounded-full tw-cursor-pointer tw-transition-colors tw-ease-in-out tw-duration-300 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-offset-2 focus:tw-ring-light-blue-500"
                         :class="{
                             'bg-green-500': table.columnIsVisible(@js($column->key)),
                             'bg-gray-200': !table.columnIsVisible(@js($column->key)),
@@ -35,14 +35,14 @@
                         @click.prevent="table.toggleColumn(@js($column->key))"
                         dusk="toggle-column-{{ $column->key }}"
                     >
-                        <span class="sr-only">Column status</span>
+                        <span class="tw-sr-only">Column status</span>
                         <span
                             aria-hidden="true"
                             :class="{
-                                'translate-x-5': table.columnIsVisible(@js($column->key)),
-                                'translate-x-0': !table.columnIsVisible(@js($column->key)),
+                                'tw-translate-x-5': table.columnIsVisible(@js($column->key)),
+                                'tw-translate-x-0': !table.columnIsVisible(@js($column->key)),
                             }"
-                            class="inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-300" />
+                            class="tw-inline-block tw-h-5 tw-w-5 tw-rounded-full tw-bg-white tw-shadow tw-transform tw-ring-0 tw-transition tw-ease-in-out tw-duration-300" />
                     </button>
                 </li>
             @endforeach

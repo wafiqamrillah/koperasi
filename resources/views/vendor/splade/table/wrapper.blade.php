@@ -1,7 +1,7 @@
-<div class="flex flex-col mt-3">
-    <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-            <div class="shadow relative sm:rounded-md sm:overflow-hidden">
+<div class="tw-flex tw-flex-col tw-mt-3">
+    <div class="-tw-my-2 tw-overflow-x-auto sm:-tw-mx-6 lg:-tw-mx-8">
+        <div class="tw-py-2 tw-align-middle tw-inline-block tw-min-w-full sm:tw-px-6 lg:tw-px-8">
+            <div class="tw-shadow tw-relative sm:tw-rounded-md sm:tw-overflow-hidden">
                 {{ $slot }}
             </div>
         </div>

@@ -1,6 +1,6 @@
 <x-splade-component is="button-with-dropdown" dusk="filters-dropdown">
     <x-slot:button>
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"
+        <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-5 tw-w-5" viewBox="0 0 20 20" fill="currentColor"
             :class="{
                 'text-gray-400': !@js($table->hasFiltersEnabled()),
                 'text-green-400': @js($table->hasFiltersEnabled()),
@@ -17,7 +17,7 @@
     >
         @foreach($table->filters() as $filter)
             <div>
-                <h3 class="text-xs uppercase tracking-wide bg-gray-100 p-3">
+                <h3 class="tw-text-xs tw-uppercase tw-tracking-wide tw-bg-gray-100 tw-p-3">
                     {{ $filter->label }}
                 </h3>
 
@@ -25,7 +25,7 @@
                     @if($filter->type === 'select')
                         <select
                             name="filter-{{ $filter->key }}"
-                            class="block focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm text-sm border-gray-300 rounded-md"
+                            class="tw-block focus:tw-ring-indigo-500 focus:tw-border-indigo-500 tw-w-full tw-shadow-sm tw-text-sm tw-border-gray-300 tw-rounded-md"
                             @change="table.updateQuery('filter[{{ $filter->key }}]', $event.target.value)"
                         >
                             @foreach($filter->options() as $optionKey => $option)
