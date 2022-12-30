@@ -1,5 +1,5 @@
 <SpladeInput
-{{ $attributes->only(['v-if', 'v-show', 'class'])->class(['hidden' => $isHidden()]) }}
+{{ $attributes->only(['v-if', 'v-show'])->class(['hidden' => $isHidden()]) }}
 :flatpickr="@js($flatpickrOptions())"
 :js-flatpickr-options="{!! $jsFlatpickrOptions !!}"
 v-model="{{ $vueModel() }}"
