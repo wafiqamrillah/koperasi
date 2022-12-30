@@ -39,8 +39,8 @@ Route::middleware('splade')->group(function () {
 
         // Settings
         Route::name('settings')->prefix('settings')->group(function () {
-            Route::get(NULL, [System\SettingController::class, 'edit'])->name('.edit');
-            Route::patch(NULL, [System\SettingController::class, 'update'])->name('.update');
+            Route::get(NULL, [System\SettingController::class, 'edit'])->name('.edit')->middleware('can:access settings');
+            Route::patch(NULL, [System\SettingController::class, 'update'])->name('.update')->middleware('can:update settings');
         });
     });
 
