@@ -27,11 +27,21 @@ Route::middleware('splade')->group(function () {
     });
 
     Route::middleware('auth')->group(function () {
+        // Dashboard
         Route::resource('dashboard', DashboardController::class)->only('index')->middleware(['verified']);
 
-        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+        // Profile
+        Route::name('profile')->prefix('profile')->group(function () {
+            Route::get(NULL, [ProfileController::class, 'edit'])->name('.edit');
+            Route::patch(NULL, [ProfileController::class, 'update'])->name('.update');
+            Route::delete(NULL, [ProfileController::class, 'destroy'])->name('.destroy');
+        });
+
+        // Settings
+        Route::name('settings')->prefix('settings')->group(function () {
+            Route::get(NULL, [System\SettingController::class, 'edit'])->name('.edit');
+            Route::patch(NULL, [System\SettingController::class, 'update'])->name('.update');
+        });
     });
 
     require __DIR__.'/auth.php';
