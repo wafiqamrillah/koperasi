@@ -15,7 +15,7 @@
                 <h2 class="text-lg font-medium text-gray-900">
                     {{ __('Are you sure you want to delete your account?') }}
                 </h2>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" dusk="close-modal-button" @click="modal.close" type="button">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" dusk="close-modal-button" @click="modal.close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
