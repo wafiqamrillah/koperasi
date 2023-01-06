@@ -33,6 +33,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'member_id'
     ];
 
     /**
@@ -52,16 +53,6 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
-
-    /**
-     * Get the user that owns the User
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function employee()
-    {
-        return $this->belongsTo(\App\Models\Hris\Employee::class, 'employee_id');
-    }
 
     /**
      * Get the member that owns the User

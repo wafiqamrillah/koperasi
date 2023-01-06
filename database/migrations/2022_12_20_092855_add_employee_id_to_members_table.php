@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->after('member_id', function($table) {
-                $table->unsignedBigInteger('employee_id')->index('users_employee_id_foreign');
+        Schema::table('members', function (Blueprint $table) {
+            $table->after('name', function($table) {
+                $table->unsignedBigInteger('employee_id')->index('members_employee_id_foreign');
             });
         });
     }
@@ -27,9 +27,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('members', function (Blueprint $table) {
             if (Schema::hasColumn($table->getTable(), 'employee_id')) {
-                $table->dropIndex('users_employee_id_foreign');
+                $table->dropIndex('members_employee_id_foreign');
 
                 $table->dropColumn('employee_id');
             }
