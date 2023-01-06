@@ -6,39 +6,62 @@
 >
     <template #default="confirm">
         <x-splade-component is="transition" show="confirm.isOpen">
-            <x-splade-component is="dialog" class="relative z-30" close="confirm.setIsOpen(false)">
+            <x-splade-component is="dialog" class="tw-relative tw-z-30" close="confirm.setIsOpen(false)">
+                <!-- The backdrop, rendered as a fixed sibling to the panel container -->
                 <x-splade-component
                     is="transition"
                     child
                     animation="opacity"
-                    class="fixed z-30 inset-0 bg-black/75"
-                />
+                    enter="tw-transition tw-ease-in-out tw-duration-300"
+                    enterFrom="tw-opacity-0"
+                    enterTo="tw-opacity-100"
+                    leave="tw-transition tw-ease-in-out tw-duration-300"
+                    leaveFrom="tw-opacity-100"
+                    leaveTo="tw-opacity-0">
+                    <div class="tw-fixed tw-z-30 tw-inset-0 tw-bg-black/75" />
+                </x-splade-component>
 
-                <div class="fixed z-40 inset-0 overflow-y-auto">
-                    <div class="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
-                        <x-splade-component is="transition" child animation="fade" after-leave="confirm.emitClose">
-                            <x-splade-component is="dialog" panel class="relative bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full sm:p-6">
-                                <div class="sm:flex sm:items-start">
-                                    <div class="text-center sm:mt-0 sm:text-left">
-                                        <h3 class="text-lg leading-6 font-medium text-gray-900" v-text="confirm.title" />
-                                        <div class="mt-2" v-if="confirm.text">
-                                            <p class="text-sm text-gray-500" v-text="confirm.text" />
-                                        </div>
-                                    </div>
+                <!-- Full-screen scrollable container -->
+                <div class="tw-fixed tw-inset-0 tw-z-40 tw-overflow-y-auto tw-p-4">
+                    <!-- Container to center the panel -->
+                    <div class="tw-flex tw-min-h-full tw-items-center tw-justify-center">
+                        <!-- The actual dialog panel -->
+                        <x-splade-component
+                            is="transition"
+                            child
+                            animation="fade"
+                            enter="tw-transition tw-transform tw-ease-in-out tw-duration-300"
+                            enterFrom="tw-opacity-0 tw-translate-y-4 sm:tw-translate-y-0 sm:tw-scale-95"
+                            enterTo="tw-opacity-100 tw-translate-y-0 sm:tw-scale-100"
+                            leave="tw-transition tw-transform tw-ease-in-out tw-duration-300"
+                            leaveFrom="tw-opacity-100 tw-translate-y-0 sm:tw-scale-100"
+                            leaveTo="tw-opacity-0 tw-translate-y-4 sm:tw-translate-y-0 sm:tw-scale-95"
+                            after-leave="confirm.emitClose"
+                            class="sm:tw-max-w-md md:tw-max-w-xl lg:tw-max-w-3xl">
+                            <x-splade-component is="dialog" panel class="modal-content">
+                                <div v-if="confirm.title" class="modal-header">
+                                    <h2 class="text-lg font-medium text-gray-900" v-text="confirm.title" />
+                                    {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close" dusk="close-modal-button" @click="confirm.close" type="button">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button> --}}
                                 </div>
 
-                                <div class="mt-5 sm:mt-4 sm:flex">
+                                <div v-if="confirm.text" class="modal-body">
+                                    <p v-text="confirm.text" />
+                                </div>
+
+                                <div class="modal-footer">
                                     <button
                                         dusk="splade-confirm-confirm"
                                         type="button"
-                                        class="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:w-auto sm:text-sm"
+                                        class="btn btn-primary"
                                         @click.prevent="confirm.confirm"
                                         v-text="confirm.confirmButton"
                                     />
                                     <button
                                         dusk="splade-confirm-cancel"
                                         type="button"
-                                        class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 px-4 py-2 bg-white text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                                        class="btn btn-default"
                                         @click.prevent="confirm.cancel"
                                         v-text="confirm.cancelButton"
                                     />

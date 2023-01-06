@@ -1,109 +1,109 @@
-<nav role="navigation" aria-label="{{ __('Pagination Navigation') }}" class="tw-flex tw-items-center tw-justify-between tw-px-4 sm:tw-px-0 tw-py-3">
-    <div class="tw-flex tw-justify-between tw-flex-1 md:tw-hidden">
+<nav role="navigation" aria-label="{{ __('Pagination Navigation') }}" class="d-flex align-items-center justify-content-between">
+    <div class="d-flex justify-content-between align-items-center d-md-none" style="flex: 1 1 0%;">
         @if ($paginator->onFirstPage())
-            <span class="tw-relative tw-inline-flex tw-items-center tw-px-4 tw-py-2 tw-text-xs sm:tw-text-sm tw-font-medium tw-text-gray-500 tw-bg-white tw-border tw-border-gray-300 tw-cursor-default tw-leading-5 tw-rounded-md">
+            <button class="btn btn-default">
                 {!! __('pagination.previous') !!}
-            </span>
+            </button>
         @else
-            <Link dusk="pagination-simple-previous" href="{{ $paginator->previousPageUrl() }}" class="tw-relative tw-inline-flex tw-items-center tw-px-4 tw-py-2 tw-text-xs sm:tw-text-sm tw-font-medium tw-text-gray-700 tw-bg-white tw-border tw-border-gray-300 tw-leading-5 tw-rounded-md hover:tw-text-gray-500 focus:tw-outline-none focus:tw-ring tw-ring-gray-300 focus:tw-border-blue-300 active:tw-bg-gray-100 active:tw-text-gray-700 tw-transition tw-ease-in-out tw-duration-150">
-                {!! __('pagination.previous') !!}
+            <Link dusk="pagination-simple-previous" href="{{ $paginator->previousPageUrl() }}">
+                <button class="btn btn-default">
+                    {!! __('pagination.previous') !!}
+                </button>
             </Link>
         @endif
 
         @includeWhen($hasPerPageOptions ?? true, 'splade::table.per-page-selector')
 
         @if ($paginator->hasMorePages())
-            <Link dusk="pagination-simple-next" href="{{ $paginator->nextPageUrl() }}" class="tw-relative tw-inline-flex tw-items-center tw-px-4 tw-py-2 tw-ml-3 tw-text-xs sm:tw-text-sm tw-font-medium tw-text-gray-700 tw-bg-white tw-border tw-border-gray-300 tw-leading-5 tw-rounded-md hover:tw-text-gray-500 focus:tw-outline-none focus:tw-ring ring-gray-300 focus:tw-border-blue-300 active:tw-bg-gray-100 active:tw-text-gray-700 tw-transition tw-ease-in-out tw-duration-150">
-                {!! __('pagination.next') !!}
+            <Link dusk="pagination-simple-next" href="{{ $paginator->nextPageUrl() }}">
+                <button class="btn btn-default">
+                    {!! __('pagination.next') !!}
+                </button>
             </Link>
         @else
-            <span class="tw-relative tw-inline-flex tw-items-center tw-px-4 tw-py-2 tw-text-xs sm:tw-text-sm tw-font-medium tw-text-gray-500 tw-bg-white tw-border tw-border-gray-300 tw-cursor-default tw-leading-5 tw-rounded-md">
+            <button class="btn btn-default">
                 {!! __('pagination.next') !!}
-            </span>
+            </button>
         @endif
     </div>
 
-    <div class="tw-hidden md:tw-flex-1 md:tw-flex md:tw-items-center md:tw-justify-between">
-        <div class="tw-flex tw-items-center">
+    <div class="d-none d-md-flex align-items-center justify-content-between" style="flex: 1 1 0%;">
+        <div class="d-flex align-items-center">
             @includeWhen($hasPerPageOptions ?? true, 'splade::table.per-page-selector')
 
-            <div class="tw-hidden lg:tw-block @if($hasPerPageOptions ?? true) tw-ml-3 @endif">
-                <p class="tw-text-xs sm:tw-text-sm tw-text-gray-700 tw-leading-5">
+            <div class="d-none d-lg-block @if($hasPerPageOptions ?? true) ml-3 @endif">
+                <span class="text-nowrap text-xs">
                     @if ($paginator->firstItem())
-                        <span class="tw-font-medium">{{ $paginator->firstItem() }}</span>
+                        <span class="font-weight-bold">{{ $paginator->firstItem() }}</span>
                         {!! __('to') !!}
-                        <span class="tw-font-medium">{{ $paginator->lastItem() }}</span>
+                        <span class="font-weight-bold">{{ $paginator->lastItem() }}</span>
                     @else
                         {{ $paginator->count() }}
                     @endif
                     {!! __('of') !!}
-                    <span class="tw-font-medium">{{ $paginator->total() }}</span>
+                    <span class="font-weight-bold">{{ $paginator->total() }}</span>
                     {!! __('results') !!}
-                </p>
+                </span>
             </div>
         </div>
 
         <div>
-            <span class="tw-relative tw-z-0 tw-inline-flex tw-shadow-sm tw-rounded-md">
+            <ul class="pagination pagination-sm m-0">
                 {{-- Previous Page Link --}}
-                @if ($paginator->onFirstPage())
-                    <span aria-disabled="true" aria-label="{{ __('pagination.previous') }}">
-                        <span class="tw-relative tw-inline-flex tw-items-center tw-px-2 tw-py-2 tw-text-xs sm:tw-text-sm tw-font-medium tw-text-gray-500 tw-bg-white tw-border tw-border-gray-300 tw-cursor-default tw-rounded-l-md tw-leading-5" aria-hidden="true">
-                            <svg class="tw-w-5 tw-h-5" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-                            </svg>
-                        </span>
-                    </span>
-                @else
-                    <Link dusk="pagination-previous" href="{{ $paginator->previousPageUrl() }}" rel="prev" class="tw-relative tw-inline-flex tw-items-center tw-px-2 tw-py-2 tw-text-xs sm:tw-text-sm tw-font-medium tw-text-gray-500 tw-bg-white tw-border tw-border-gray-300 tw-rounded-l-md tw-leading-5 hover:tw-text-gray-400 focus:tw-z-10 focus:tw-outline-none focus:tw-ring tw-ring-gray-300 focus:tw-border-blue-300 active:tw-bg-gray-100 active:tw-text-gray-500 tw-transition tw-ease-in-out tw-duration-150" aria-label="{{ __('pagination.previous') }}">
-                        <svg class="tw-w-5 tw-h-5" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-                        </svg>
-                    </Link>
-                @endif
+                <li class="page-item">
+                    @if ($paginator->onFirstPage())
+                        <a class="page-link" href="#" aria-disabled="true" aria-label="{{ __('pagination.previous') }}">
+                            &laquo;
+                        </a>
+                    @else
+                        <Link class="page-link" dusk="pagination-previous" href="{{ $paginator->previousPageUrl() }}" rel="prev" aria-disabled="false" aria-label="{{ __('pagination.previous') }}">
+                            &laquo;
+                        </Link>
+                    @endif
+                </li>
 
                 {{-- Pagination Elements --}}
                 @foreach ($elements as $element)
                     {{-- "Three Dots" Separator --}}
                     @if (is_string($element))
-                        <span aria-disabled="true">
-                            <span class="tw-relative tw-inline-flex tw-items-center tw-px-4 tw-py-2 -tw-ml-px tw-text-xs sm:tw-text-sm tw-font-medium tw-text-gray-700 tw-bg-white tw-border tw-border-gray-300 tw-cursor-default tw-leading-5">{{ $element }}</span>
-                        </span>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-disabled="true">
+                                {{ $element }}
+                            </a>
+                        </li>
                     @endif
 
                     {{-- Array Of Links --}}
                     @if (is_array($element))
                         @foreach ($element as $page => $url)
-                            @if ($page == $paginator->currentPage())
-                                <span aria-current="page">
-                                    <span class="tw-relative tw-inline-flex tw-items-center tw-px-4 tw-py-2 -tw-ml-px tw-text-xs sm:tw-text-sm tw-font-medium tw-bg-indigo-50 tw-border-indigo-500 tw-text-indigo-600 tw-z-10 tw-border tw-cursor-default tw-leading-5">{{ $page }}</span>
-                                </span>
-                            @else
-                                <Link dusk="pagination-{{ $page }}" href="{{ $url }}" class="tw-relative tw-inline-flex tw-items-center tw-px-4 tw-py-2 -tw-ml-px tw-text-xs sm:tw-text-sm tw-font-medium tw-text-gray-700 tw-bg-white tw-border tw-border-gray-300 tw-leading-5 hover:tw-text-gray-500 focus:tw-z-10 focus:tw-outline-none focus:tw-ring ring-gray-300 focus:tw-border-blue-300 active:tw-bg-gray-100 active:tw-text-gray-700 tw-transition tw-ease-in-out tw-duration-150" aria-label="{{ __('Go to page :page', ['page' => $page]) }}">
-                                    {{ $page }}
-                                </Link>
-                            @endif
+                            <li class="page-item">
+                                @if ($page == $paginator->currentPage())
+                                    <a class="page-link" href="#" aria-current="page" aria-disabled="true">
+                                        {{ $page }}
+                                    </a>
+                                @else
+                                    <Link class="page-link" dusk="pagination-{{ $page }}" href="{{ $url }}" aria-label="{{ __('Go to page :page', ['page' => $page]) }}">
+                                        {{ $page }}
+                                    </Link>
+                                @endif
+                            </li>
                         @endforeach
                     @endif
                 @endforeach
-
+                
                 {{-- Next Page Link --}}
-                @if ($paginator->hasMorePages())
-                    <Link dusk="pagination-next" href="{{ $paginator->nextPageUrl() }}" rel="next" class="tw-relative tw-inline-flex tw-items-center tw-px-2 tw-py-2 -tw-ml-px tw-text-xs sm:tw-text-sm tw-font-medium tw-text-gray-500 tw-bg-white tw-border tw-border-gray-300 tw-rounded-r-md tw-leading-5 hover:tw-text-gray-400 focus:tw-z-10 focus:tw-outline-none focus:tw-ring tw-ring-gray-300 focus:tw-border-blue-300 active:tw-bg-gray-100 active:tw-text-gray-500 tw-transition tw-ease-in-out tw-duration-150" aria-label="{{ __('pagination.next') }}">
-                        <svg class="tw-w-5 tw-h-5" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                        </svg>
+                <li class="page-item">
+                @if ($paginator->onFirstPage())
+                    <Link class="page-link" dusk="pagination-next" href="{{ $paginator->nextPageUrl() }}" rel="next" aria-disabled="false" aria-label="{{ __('pagination.next') }}">
+                        &raquo;
                     </Link>
                 @else
-                    <span aria-disabled="true" aria-label="{{ __('pagination.next') }}">
-                        <span class="tw-relative tw-inline-flex tw-items-center tw-px-2 tw-py-2 -tw-ml-px tw-text-xs sm:tw-text-sm tw-font-medium tw-text-gray-500 tw-bg-white tw-border tw-border-gray-300 tw-cursor-default tw-rounded-r-md tw-leading-5" aria-hidden="true">
-                            <svg class="tw-w-5 tw-h-5" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                            </svg>
-                        </span>
-                    </span>
+                    <a class="page-link" href="#" aria-disabled="true" aria-label="{{ __('pagination.next') }}">
+                        &raquo;
+                    </a>
                 @endif
-            </span>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>

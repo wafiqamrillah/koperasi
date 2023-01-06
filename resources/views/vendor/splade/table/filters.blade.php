@@ -1,42 +1,28 @@
-<x-splade-component is="button-with-dropdown" dusk="filters-dropdown">
-    <x-slot:button>
-        <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-5 tw-w-5" viewBox="0 0 20 20" fill="currentColor"
-            :class="{
-                'text-gray-400': !@js($table->hasFiltersEnabled()),
-                'text-green-400': @js($table->hasFiltersEnabled()),
-            }"
-        >
-            <path fill-rule="evenodd" d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z" clip-rule="evenodd" />
-        </svg>
-    </x-slot:button>
+<x-splade-toggle dusk="filters-dropdown">
+    <button type="button" class="btn btn-default btn-flat" data-toggle="dropdown" aria-expanded="false" @click.prevent="toggle" style="position: relative;">
+        <i class="fa-solid fa-filter"></i>
+        <i class="fa-solid fa-caret-down ml-2"></i>
 
-    <div
-      role="menu"
-      aria-orientation="horizontal"
-      aria-labelledby="filter-menu"
-    >
-        @foreach($table->filters() as $filter)
-            <div>
-                <h3 class="tw-text-xs tw-uppercase tw-tracking-wide tw-bg-gray-100 tw-p-3">
+        <ul class="dropdown-menu dropdown-menu-lg" :class="{ 'show' : toggled }" role="menu" aria-orientation="horizontal" aria-labelledby="filter-menu">
+            @foreach($table->filters() as $filter)
+                <li class="dropdown-header">
                     {{ $filter->label }}
-                </h3>
-
-                <div class="p-2">
-                    @if($filter->type === 'select')
-                        <select
-                            name="filter-{{ $filter->key }}"
-                            class="tw-block focus:tw-ring-indigo-500 focus:tw-border-indigo-500 tw-w-full tw-shadow-sm tw-text-sm tw-border-gray-300 tw-rounded-md"
-                            @change="table.updateQuery('filter[{{ $filter->key }}]', $event.target.value)"
-                        >
-                            @foreach($filter->options() as $optionKey => $option)
-                                <option @selected($filter->hasValue() && $filter->value == $optionKey) value="{{ $optionKey }}">
-                                    {{ $option }}
-                                </option>
-                            @endforeach
-                        </select>
-                    @endif
-                </div>
-            </div>
-        @endforeach
-    </div>
-</x-splade-component>
+                </li>
+                
+                @if($filter->type === 'select')
+                    <select
+                        name="filter-{{ $filter->key }}"
+                        class="form-control form-control-sm"
+                        @change="table.updateQuery('filter[{{ $filter->key }}]', $event.target.value)"
+                    >
+                        @foreach($filter->options() as $optionKey => $option)
+                            <option @selected($filter->hasValue() && $filter->value == $optionKey) value="{{ $optionKey }}">
+                                {{ $option }}
+                            </option>
+                        @endforeach
+                    </select>
+                @endif
+            @endforeach
+        </ul>
+    </button>
+</x-splade-toggle>

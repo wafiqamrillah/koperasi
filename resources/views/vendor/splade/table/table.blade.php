@@ -7,7 +7,7 @@
     :items-on-all-pages="@js($table->totalOnAllPages())"
 >
     <template #default="{!! $scope !!}">
-        <div {{ $attributes->only('class') }} :class="{ 'tw-opacity-50': table.isLoading }">
+        <div {{ $attributes->only('class') }} :style="{ 'opacity: 0.5;': table.isLoading }">
             @if($hasControls())
                 @include('splade::table.controls')
             @endif
@@ -17,7 +17,7 @@
             @endforeach
 
             <x-splade-component is="table-wrapper">
-                <table class="min-w-full divide-y divide-gray-200 bg-white">
+                <table class="table table-hover table-bordered table-nowrap" :class="{ 'table-striped' : table.striped }">
                     @unless($headless)
                         @isset($head)
                             {{ $head }}

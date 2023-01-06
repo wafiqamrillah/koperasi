@@ -1,7 +1,7 @@
-<thead class="tw-bg-gray-50">
+<thead>
     <tr>
         @if($hasBulkActions = $table->hasBulkActions())
-            <th width="64" class="tw-px-6 tw-py-3 tw-text-xs">
+            <th class="text-center">
                 @include('splade::table.select-rows-dropdown')
             </th>
         @endif
@@ -9,30 +9,31 @@
         @foreach($table->columns() as $column)
             <th
                 v-show="table.columnIsVisible(@js($column->key))"
-                class="@if($loop->first && $hasBulkActions) tw-pr-6 @else tw-px-6 @endif tw-py-3 tw-text-left tw-text-xs tw-font-medium tw-tracking-wide tw-text-gray-500"
+                class="text-left text-xs"
+                style="padding-right: 1.5rem;{{ $loop->first && $hasBulkActions ? 'padding-left: 1.5rem;' : null }}padding-top: 0.75rem;padding-bottom: 0.75rem;font-weight: 500;letter-spacing: 0.025em;"
             >
                 @if($column->sortable)
-                    <Link dusk="sort-{{ $column->key }}" href="{{ $sortBy($column) }}">
+                <Link dusk="sort-{{ $column->key }}" href="{{ $sortBy($column) }}" class="text-body">
                 @endif
 
-                <span class="tw-flex tw-flex-row tw-items-center">
-                    <span class="tw-uppercase">{{ $column->label }}</span>
+                    <span style="display: flex; flex-director: row; align-items: center;">
+                        <span style="text-transform: uppercase;">{{ $column->label }}</span>
 
-                    @if($column->sortable)
-                        <svg aria-hidden="true" class="tw-w-3 tw-h-3 tw-ml-2 {{ $column->sorted ? 'tw-text-green-500' : 'tw-text-gray-400' }}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                            @if(!$column->sorted)
-                                <path fill="currentColor" d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41zm255-105L177 64c-9.4-9.4-24.6-9.4-33.9 0L24 183c-15.1 15.1-4.4 41 17 41h238c21.4 0 32.1-25.9 17-41z" />
-                            @elseif($column->sorted === 'asc')
-                                <path fill="currentColor" d="M279 224H41c-21.4 0-32.1-25.9-17-41L143 64c9.4-9.4 24.6-9.4 33.9 0l119 119c15.2 15.1 4.5 41-16.9 41z" />
-                            @elseif($column->sorted === 'desc')
-                                <path fill="currentColor" d="M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41z" />
-                            @endif
-                        </svg>
-                    @endif
-                </span>
+                        @if($column->sortable)
+                            <span style="padding-left: 1.5rem;">
+                                @if(!$column->sorted)
+                                    <i class="fa-solid fa-sort"></i>
+                                @elseif($column->sorted === 'asc')
+                                    <i class="fa-solid fa-sort-down"></i>
+                                @elseif($column->sorted === 'desc')
+                                    <i class="fa-solid fa-sort-asc"></i>
+                                @endif
+                            </span>
+                        @endif
+                    </span>
 
                 @if($column->sortable)
-                    </Link>
+                </Link>
                 @endif
             </th>
         @endforeach
