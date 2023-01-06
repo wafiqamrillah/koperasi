@@ -2,7 +2,7 @@
     <div style="position: relative;">
         <x-splade-toggle>
             <button v-if="table.hasSelectedItems" type="button" class="btn btn-default btn-flat" data-toggle="dropdown" aria-expanded="false" @click.prevent="toggle">
-                Actions <span v-text="table.totalSelectedItems" class="badge bg-info" />
+                {{ __('Actions') }} <span v-text="table.totalSelectedItems" class="badge bg-info" />
             </button>
             <div class="dropdown-menu dropdown-menu-right" :class="{ 'show' : toggled }" @click.prevent="setToggle(false)" role="menu" aria-orientation="horizontal">
                 <div class="dropdown-header">
@@ -31,7 +31,7 @@
     <div style="position: relative;">
         <x-splade-toggle>
             <button v-if="@js($table->hasExports())" type="button" class="btn btn-default btn-flat" data-toggle="dropdown" aria-expanded="false" @click.prevent="toggle">
-                <i class="fa-solid fa-file-excel"></i> Export
+                <i class="fa-solid fa-file-excel"></i> {{ __('Export') }}
             </button>
         
             <div class="dropdown-menu dropdown-menu-right" :class="{ 'show' : toggled }" @click="toggle" role="menu" aria-orientation="horizontal">
