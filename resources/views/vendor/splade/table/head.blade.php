@@ -1,7 +1,7 @@
 <thead>
     <tr>
         @if($hasBulkActions = $table->hasBulkActions())
-            <th class="text-center">
+            <th class="text-center" style="vertical-align: middle;">
                 @include('splade::table.select-rows-dropdown')
             </th>
         @endif

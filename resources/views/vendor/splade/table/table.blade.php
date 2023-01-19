@@ -17,7 +17,7 @@
             @endforeach
 
             <x-splade-component is="table-wrapper">
-                <table class="table table-hover table-bordered table-nowrap" :class="{ 'table-striped' : table.striped }">
+                <table class="table table-sm table-hover table-bordered table-nowrap" :class="{ 'table-striped' : table.striped }">
                     @unless($headless)
                         @isset($head)
                             {{ $head }}
