@@ -1,4 +1,9 @@
-<x-splade-component is="modal-wrapper" :base-attributes="$attributes->except('class')" :key="$modalKey" :close-button="$closeButton" :name="$name">
+@props([
+    'title',
+    'close' => 'modal.setIsOpen'
+])
+
+<x-splade-component is="modal-wrapper" :base-attributes="$attributes->except('class')" :key="$modalKey" :close-button="$closeButton" :name="$name" :close="$close">
     <!-- Full-screen scrollable container -->
     <div class="tw-fixed tw-inset-0 tw-z-40 tw-overflow-y-auto tw-p-4">
         <!-- Container to center the panel -->
@@ -31,6 +36,19 @@
                 }">
                 <x-splade-component is="dialog" panel dusk="modal-dialog">
                     <div {{ $attributes->class('modal-content') }}>
+                        <x-splade-data :default="['title' => isset($title) ? $title : null]">
+                            <div v-if="data.title || modal.closeButton" class="modal-header">
+                                <template v-if="data.title">
+                                    <h2 class="text-lg font-medium text-gray-900" v-html="data.title" />
+                                </template>
+                                <template v-if="modal.closeButton">
+                                    <button type="button" class="close" @click="modal.close" data-dismiss="modal" aria-label="Close" dusk="close-modal-button">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </template>
+                            </div>
+                        </x-splade-data>
+
                         {{ $slot }}
                     </div>
                 </x-splade-component>

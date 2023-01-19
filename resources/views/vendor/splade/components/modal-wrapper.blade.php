@@ -1,8 +1,10 @@
+@props(['close' => 'modal.setIsOpen'])
+
 <!--START-SPLADE-MODAL-{{ $key }}-->
 <SpladeModal {{ $baseAttributes->mergeVueBinding(':close-button', $closeButton) }} :name="@js($name)">
     <template #default="modal">
         <x-splade-component is="transition" show="modal.isOpen">
-            <x-splade-component is="dialog" v-bind:dusk="`modal.${modal.stack}`" close="modal.setIsOpen" class="tw-relative tw-z-20">
+            <x-splade-component is="dialog" static v-bind:dusk="`modal.${modal.stack}`" :close="$close" class="tw-relative tw-z-20">
                 <!-- The backdrop, rendered as a fixed sibling to the panel container -->
                 <x-splade-component
                     is="transition"
@@ -17,7 +19,7 @@
                     <div v-show="modal.onTopOfStack" class="tw-fixed tw-z-30 tw-inset-0 tw-bg-black/75" />
                 </x-splade-component>
 
-                <div v-if="modal.stack > 1 && modal.onTopOfStack" class="tw-fixed tw-z-30 tw-inset-0 tw-bg-black/75" />
+                <div v-if="modal.stack > 1 && modal.onTopOfStack" class="tw-fixed tw-z-30 tw-inset-0 tw-bg-black/75" v-bind:style="{ pointerEvents: 'none' }" />
 
                 {{ $slot }}
             </x-splade-component>
