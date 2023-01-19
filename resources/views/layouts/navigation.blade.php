@@ -12,30 +12,20 @@
             <li class="nav-item dropdown">
                 <div class="nav-link" data-toggle="dropdown" :aria-expanded="!toggled" @click.prevent="toggle">
                     <i class="fa-regular fa-bell"></i>
-                    @if (auth()->user()->unreadNotifications->count() > 0)
+                    {{-- @if (auth()->user()->unreadNotifications->count() > 0)
                     <span class="badge badge-warning navbar-badge">
                         {{ auth()->user()->unreadNotifications->count() <= 9 ? auth()->user()->unreadNotifications->count() : "9+" }}
                     </span>
-                    @endif
+                    @endif --}}
                 </div>
                 <div class="dropdown-menu dropdown-menu-xl dropdown-menu-right" :class="{ 'show' : toggled }">
-                    <span class="dropdown-item dropdown-header">
-                        {{ auth()->user()->unreadNotifications->count() }} Notifications
-                    </span>
-                    @forelse (auth()->user()->unreadNotifications as $notification)
-                    <div class="dropdown-divider"></div>
-                    <Link href="#" class="dropdown-item">
-                        Notification
-                        <span class="float-right text-muted text-sm">
-                            Times
-                        </span>
-                    </Link>
-                    @empty
-                    <div class="dropdown-divider"></div>
-                    <p class="my-2 text-center text-xs">
-                        {{ __('There is no notification') }}
-                    </p>
-                    @endforelse
+                    <x-splade-lazy url="{{ route('notifications.get') }}">
+                        <x-slot::placeholder>
+                            <span class="dropdown-item dropdown-header">
+                                <i class="fa-solid fa-circle-notch fa-spin"></i> Loading...
+                            </span>
+                        </x-slot::placeholder>
+                    </x-splade-lazy>
                 </div>
             </li>
         </x-splade-toggle>
