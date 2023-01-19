@@ -27,8 +27,16 @@ Route::middleware('splade')->group(function () {
     });
 
     Route::middleware('auth')->group(function () {
-        // Dashboard
-        Route::resource('dashboard', DashboardController::class)->only('index')->middleware(['verified']);
+        Route::middleware(['verified'])->group(function () {
+            // Dashboard
+            Route::resource('dashboard', DashboardController::class)->only('index');
+
+            // Notifications
+            Route::name('notifications.')->prefix('notifications')->group(function() {
+                // Route::resource(NULL, System\NotificationController::class)->only('index');
+                Route::get('get', System\GetNotificationController::class)->name('get');
+            });
+        });
 
         // Profile
         Route::name('profile')->prefix('profile')->group(function () {
@@ -38,9 +46,9 @@ Route::middleware('splade')->group(function () {
         });
 
         // Settings
-        Route::name('settings')->prefix('settings')->group(function () {
-            Route::get(NULL, [System\SettingController::class, 'edit'])->name('.edit')->middleware('can:access settings');
-            Route::patch(NULL, [System\SettingController::class, 'update'])->name('.update')->middleware('can:update settings');
+        Route::name('settings.')->prefix('settings')->group(function () {
+            Route::get(NULL, [System\SettingController::class, 'edit'])->name('edit')->middleware('can:access settings');
+            Route::patch(NULL, [System\SettingController::class, 'update'])->name('update')->middleware('can:update settings');
 
             // Users
             Route::resource('users', System\UserController::class)->middleware('can:access user settings');
