@@ -22,7 +22,11 @@ class RoleAndPermissionSeeder extends Seeder
 
         $permissions = collect([
             'access settings',
-            'update settings'
+            'update settings',
+            'create member',
+            'update member',
+            'delete member',
+            'view member'
         ]);
 
         try {
