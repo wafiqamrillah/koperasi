@@ -10,20 +10,20 @@ class Menu extends Model
     use HasFactory;
 
     protected $fillable = [
-        'sort',
-        'title',
         'parent_id',
-        'link',
+        'sort',
+        'label',
         'link_type',
+        'link',
         'icon_class',
         'has_translation',
         'is_active',
     ];
 
     protected $guarded = [
-        "title",
         "parent_id",
-        "is_active"
+        "is_active",
+        'has_translation',
     ];
 
     protected $with = ["childs"];
