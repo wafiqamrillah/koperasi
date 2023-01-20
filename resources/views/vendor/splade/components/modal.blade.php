@@ -35,7 +35,7 @@
                     'sm:tw-max-w-md md:tw-max-w-xl lg:tw-max-w-3xl xl:tw-max-w-5xl 2xl:tw-max-w-7xl': modal.maxWidth == '7xl'
                 }">
                 <x-splade-component is="dialog" panel dusk="modal-dialog">
-                    <div {{ $attributes->class('modal-content') }}>
+                    <div {{ $attributes->class('text-sm modal-content') }}>
                         <x-splade-data :default="['title' => isset($title) ? $title : null]">
                             <div v-if="data.title || modal.closeButton" class="modal-header">
                                 <template v-if="data.title">
