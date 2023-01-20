@@ -1,7 +1,7 @@
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <ul class="navbar-nav">
         <li class="nav-item">
-            <div class="nav-link" href="#" @click.prevent="toggle" role="button">
+            <div class="nav-link" href="#" @click.prevent="data.collapse = !data.collapse" role="button">
                 <i class="fa-solid fa-bars"></i>
             </div>
         </li>

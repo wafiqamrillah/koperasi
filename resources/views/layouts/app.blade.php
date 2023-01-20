@@ -1,8 +1,8 @@
 <div class="tw-relative">
-    <x-splade-toggle>
+    <x-splade-data remember="navigation-cookie" local-storage default="{ collapse: false }">
         <div
             class="sidebar-mini control-sidebar-slide-open layout-fixed layout-navbar-fixed layout-footer-fixed"
-            :class="{ 'sidebar-collapse sidebar-close' : !toggled, 'sidebar-open' : toggled }">
+            :class="{ 'sidebar-collapse sidebar-close' : !data.collapse, 'sidebar-open' : data.collapse }">
             <div class="wrapper">
                 <!-- Navigation -->
                 @include('layouts.navigation')
@@ -58,5 +58,5 @@
                 <div id="sidebar-overlay" @click.prevent="setToggle(false)"></div>
             </div>
         </div>
-    </x-splade-toggle>    
+    </x-splade-data>    
 </div>
