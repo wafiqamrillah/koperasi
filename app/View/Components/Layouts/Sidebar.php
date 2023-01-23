@@ -9,6 +9,9 @@ use App\Models\System\Menu;
 
 class Sidebar extends Component
 {
+    protected string $defaultLink = "#", $defaultIconClass = "fa-solid fa-fw fa-circle";
+    protected bool $defaultHasTranslation = FALSE;
+
     public function __construct(
         public \Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection|array $menus = [],
         public ?string $application_logo = null,
@@ -31,19 +34,33 @@ class Sidebar extends Component
             ->mainMenu()
             ->orderBy('sort', 'asc')
             ->get()
-            ->map(function($menu) {
-                return $this->buildMenu($menu);
-            })
             ->filter(function($menu) {
                 return $this->filterMenu($menu);
+            })
+            ->map(function($menu) {
+                return $this->buildMenu($menu);
             });
     }
 
     protected function buildMenu($menu)
     {
-        $menu->childs = $menu->childs->filter(function($child) {
-            return $this->filterMenu($child);
-        });
+        $menu = collect($menu);
+
+        $link_type = isset($menu['link_type']) ? $menu['link_type'] : "url";
+        $link = isset($menu['link']) ? $menu['link'] : "#";
+        $has_translation = isset($menu['has_translation']) ? $menu['has_translation'] : $this->defaultHasTranslation; 
+
+        $menu['childs'] = collect($menu['childs'])
+            ->filter(function($child) {
+                return $this->filterMenu($child);
+            })
+            ->map(function($child) {
+                return $this->buildMenu($child);
+            });
+
+        $menu['link'] = $menu['childs']->count() > 0 ? $this->defaultLink : ($link_type === "route" && $link !== $this->defaultLink ? route($link) : $this->defaultLink);
+        $menu['icon_class'] = isset($menu['icon_class']) ? $menu['icon_class'] : $this->defaultIconClass;
+        $menu['label'] = isset($menu['label']) ? ($has_translation ? __($menu['label']) : $menu['label']) : "";
 
         return $menu;
     }

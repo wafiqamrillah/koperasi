@@ -10,7 +10,7 @@ class Menu extends Component
 {
     public Collection|array $childs = [];
     public string $link = "#";
-    public string $icon_class = "fa-solid fa-circle";
+    public string $icon_class = "fa-solid fa-fw fa-circle";
     public bool $has_translation = FALSE;
     public string $label = "Menu";
 
@@ -21,14 +21,11 @@ class Menu extends Component
      */
     public function __construct(public EloquentCollection|Collection|array $menu = [])
     {
-        $link_type = isset($menu['link_type']) ? $menu['link_type'] : "url";
-        $link = isset($menu['link']) ? $menu['link'] : "#";
-
-        $this->childs = isset($menu['childs']) ? collect($menu['childs']) : collect($this->childs);
-        $this->link = $this->childs->count() > 0 ? $this->link : ($link_type === "route" && $link !== $this->link ? route($link) : $link);
-        $this->icon_class = isset($menu['icon_class']) ? $menu['icon_class'] : $this->icon_class;
-        $this->has_translation = isset($menu['has_translation']) ? $menu['has_translation'] : $this->has_translation;
-        $this->label = isset($menu['label']) ? $menu['label'] : $this->label;
+        $this->childs = $menu['childs'];
+        $this->link = $menu['link'];
+        $this->icon_class = $menu['icon_class'];
+        $this->has_translation = $menu['has_translation'];
+        $this->label = $menu['label'];
     }
 
     /**

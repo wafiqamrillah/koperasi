@@ -24,7 +24,8 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar nav-compact nav-child-indent flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 @foreach($menus as $menu)
-                    <x-layouts.sidebar.menu :menu="collect($menu)" />
+                    {{-- <x-layouts.sidebar.menu :menu="collect($menu)" /> --}}
+                    <SidebarMenu :menu="@js($menu)" />
                 @endforeach
             </ul>
         </nav>

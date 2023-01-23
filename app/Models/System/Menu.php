@@ -27,6 +27,16 @@ class Menu extends Model
     ];
 
     protected $with = ["childs"];
+
+    /**
+     * Get the parent that owns the Menu
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function parent()
+    {
+        return $this->belongsTo(Menu::class, 'parent_id', 'id');
+    }
     
     /**
      * Get all of the childs for the Menu
