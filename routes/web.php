@@ -45,6 +45,16 @@ Route::middleware('splade')->group(function () {
             Route::delete(NULL, [ProfileController::class, 'destroy'])->name('.destroy');
         });
 
+        // Masters
+        Route::name('master')->prefix('master')->group(function() {
+            Route::name('.')->group(function() {
+                Route::resource('members', Master\Member\MemberController::class);
+                Route::prefix('members')->name('members.')->group(function() {
+                    Route::get('{member}/delete', [Master\Member\MemberController::class, 'delete'])->name('delete');
+                });
+            });
+        });
+
         // Settings
         Route::name('settings.')->prefix('settings')->group(function () {
             Route::get(NULL, [System\SettingController::class, 'edit'])->name('edit')->middleware('can:access settings');
