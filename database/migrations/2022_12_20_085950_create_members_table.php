@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string('account_number', 50)->nullable();
             $table->boolean('is_active')->default(false);
             $table->foreignId('created_by')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');
+            $table->foreignId('updated_by')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');
+            $table->foreignId('deleted_by')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Requests\System\Member;
+namespace App\Http\Requests\Master\Member;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Master\Member\Member;
 
 class UpdateMemberRequest extends FormRequest
 {
@@ -27,7 +28,7 @@ class UpdateMemberRequest extends FormRequest
         
         return [
             'name' => 'required|string',
-            'id_card_number' => 'required|numeric|unique:'. $table .',id_card_number',
+            'id_card_number' => 'required|numeric|unique:'. $table .',id_card_number' . ($this->route('member') ? ','.$this->route('member')->id : '' ),
             'birth_place' => 'required|string',
             'birth_date' => 'required|date',
             'address' => 'required|string',
@@ -35,7 +36,7 @@ class UpdateMemberRequest extends FormRequest
             'phone_number' => 'nullable|numeric',
             'account_number' => 'nullable|numeric',
             'is_active' => 'boolean',
-            'employee_id' => 'nullable|numeric|unique:' . $table . ',employee_id'
+            'employee_id' => 'nullable|numeric|unique:' . $table . ',employee_id' . ($this->route('member') ? ','.$this->route('member')->id : '' )
         ];
     }
 }
