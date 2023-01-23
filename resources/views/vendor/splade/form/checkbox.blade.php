@@ -1,3 +1,5 @@
+@props(['readonly' => false])
+
 <div {{ $attributes->only(['v-if', 'v-show'])->class('form-check') }}>
     <input {{ $attributes->except(['v-if', 'v-show'])->only(['class'])->class(
         'form-check-input'
@@ -7,6 +9,7 @@
         'type' => 'checkbox',
         'v-model' => $vueModel(),
         'data-validation-key' => $validationKey(),
+        'onclick' => $readonly ? 'return false;' : null,
     ]) }} :true-value="@js($value)" :false-value="@js($falseValue)" />
     
     @if(trim($slot))
