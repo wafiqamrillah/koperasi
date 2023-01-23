@@ -34,6 +34,9 @@
                                 <div class="col-xs-12 col-md-6">
                                     <x-splade-input id="birth_date" name="birth_date" type="date" :label="__('Birth Date')" :placeholder="__('Birth Date')" readonly />
                                 </div>
+                                <div class="col-6">
+                                    <x-splade-input id="phone_number" name="phone_number" type="text" :label="__('Phone Number')" :placeholder="__('Phone Number')" readonly />
+                                </div>
                                 <div class="col-12">
                                     <x-splade-textarea id="address" name="address" :label="__('Address')" :placeholder="__('Address')" readonly />
                                 </div>
