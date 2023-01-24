@@ -23,7 +23,8 @@ return new class extends Migration
             $table->boolean('is_married')->default(false);
             $table->string('phone_number', 13)->nullable();
             $table->string('account_number', 50)->nullable();
-            $table->boolean('is_active')->default(false);
+            $table->boolean('is_active')->default(true);
+            $table->boolean('is_blocked')->default(false);
             $table->foreignId('created_by')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');
             $table->foreignId('updated_by')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');
             $table->foreignId('deleted_by')->nullable()->constrained('users')->onUpdate('cascade')->onDelete('set null');

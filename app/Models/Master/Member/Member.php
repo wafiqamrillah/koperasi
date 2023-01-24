@@ -19,7 +19,8 @@ class Member extends Model
         'is_married',
         'phone_number',
         'account_number',
-        'is_active'
+        'is_active',
+        'is_blocked'
     ];
 
     protected $guarded = [
