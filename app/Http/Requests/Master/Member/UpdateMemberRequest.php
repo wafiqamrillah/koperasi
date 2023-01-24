@@ -36,6 +36,7 @@ class UpdateMemberRequest extends FormRequest
             'phone_number' => 'nullable|numeric',
             'account_number' => 'nullable|numeric',
             'is_active' => 'boolean',
+            'is_blocked' => 'nullable|boolean',
             'employee_id' => 'nullable|numeric|unique:' . $table . ',employee_id' . ($this->route('member') ? ','.$this->route('member')->id : '' )
         ];
     }
