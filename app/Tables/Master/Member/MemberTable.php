@@ -6,6 +6,7 @@ use App\Models\Master\Member\Member;
 use Illuminate\Http\Request;
 use ProtoneMedia\Splade\AbstractTable;
 use ProtoneMedia\Splade\SpladeTable;
+use ProtoneMedia\Splade\Facades\{ Splade, Toast };
 
 class MemberTable extends AbstractTable
 {
@@ -48,6 +49,10 @@ class MemberTable extends AbstractTable
     public function configure(SpladeTable $table)
     {
         $table
+            // ->bulkAction('Touch timestamp',
+            //     each: fn ($member) => $collectible->push($member),
+            //     after: fn () => dd($collectible)
+            // )
             ->withGlobalSearch(columns: ['name', 'id_card_number'])
             ->defaultSort('name')
             ->column(
@@ -76,16 +81,11 @@ class MemberTable extends AbstractTable
                 canBeHidden: true
             )
             ->column(
-                key: 'address',
-                label: __('Address'),
-                canBeHidden: true
-            )
-            ->column(
                 key: 'action',
                 label: __('Action')
             )
             ->paginate(15)
-            ->hidePaginationWhenResourceContainsOnePage()
+            // ->hidePaginationWhenResourceContainsOnePage()
             ;
     }
 }

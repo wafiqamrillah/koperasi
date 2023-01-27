@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Master\Member;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Master\Member\{ StoreMemberRequest, UpdateMemberRequest };
-use ProtoneMedia\Splade\Facades\{ Splade, Toast };
 
 // Models
 use App\Models\Master\Member\Member;
@@ -77,7 +76,7 @@ class MemberController extends Controller
                     break;
             }
 
-            return Toast::title($title)
+            return \Toast::title($title)
                 ->message($message)
                 ->danger()
                 ->center()
@@ -148,7 +147,7 @@ class MemberController extends Controller
                     break;
             }
 
-            return Toast::title($title)
+            return \Toast::title($title)
                 ->message($message)
                 ->danger()
                 ->center()
@@ -195,11 +194,87 @@ class MemberController extends Controller
                     break;
             }
 
-            return Toast::title($title)
+            return \Toast::title($title)
                 ->message($message)
                 ->danger()
                 ->center()
                 ->backdrop();
+        }
+    }
+    
+    /**
+     * Show the modal for importing new resources in storage.
+     *
+     * @param  \App\Models\Master\Member\Member  $member
+     * @return \Illuminate\Http\Response
+     */
+    public function import()
+    {
+        return view('master.members.import');
+    }
+    
+    /**
+     * Store new resources created in storage.
+     *
+     * @param  \App\Models\Master\Member\Member  $member
+     * @return \Illuminate\Http\Response
+     */
+    public function importing(Request $request)
+    {
+        try {
+            if (!$request->hasFile('file')) throw new \Exception(__("There is no file uploaded") . '.');
+            
+            $file = $request->file('file');
+            
+            $data = \DB::transaction(function () use($file) {
+                $imports = (new \App\Imports\ExcelImport)->toArray($file);
+                if (!isset($imports[0])) throw new \Exception(__("There is no data inputted") . '.');
+
+                // Import
+                $imports = collect($imports[0]);
+
+                // Header
+                $header = $imports->splice(0, 1)->first();
+
+                // Datas
+                $datas = $imports->map(function($data) use($header) {
+                    return collect($data)->mapWithKeys(function($d, $i) use($header) {
+                        return [$header[$i] => $d];
+                    });
+                });
+                
+                // Store into database
+                $datas = $datas->map(function($data, $index) {
+                    $current_data = $data->toArray();
+                    $current_data['birth_date'] = \Carbon\Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($current_data['birth_date']));
+
+                    // Validator
+                    $validator = \Validator::make($current_data, (new StoreMemberRequest)->rules());
+                    
+                    try {
+                        $validator->validate();
+                    } catch (\Exception $e) {
+                        throw new \Exception('Validation at row-' . ($index + 1) . ' : ' . $e->getMessage());
+                    }
+                    
+                    $member = new Member($validator->validated());
+                    $member->save();
+
+                    return $member;
+                });
+
+                return $datas;
+            });
+            
+            return redirect()->route('master.members.index')->with('success', __('Data has been imported successfully') .'. Total data : '.$data->count());
+        } catch (\Exception $e) {
+            \Toast::title("Whoops!")
+                ->message($e->getMessage())
+                ->danger()
+                ->center()
+                ->backdrop();
+
+            return back();
         }
     }
 }

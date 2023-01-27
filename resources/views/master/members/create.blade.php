@@ -5,6 +5,22 @@
         </h1>
     </x-slot>
 
+    <x-slot name="breadcrumbs">
+        <li class="breadcrumb-item">
+            <Link href="{{ route('dashboard.index') }}">
+                Home
+            </Link>
+        </li>
+        <li class="breadcrumb-item">
+            <Link href="{{ route('master.members.index') }}">
+                Members
+            </Link>
+        </li>
+        <li class="breadcrumb-item active">
+            {{ __('Create') }}
+        </li>
+    </x-slot>
+
     <x-splade-form dusk="create-member" method="POST" :action="route('master.members.store')">
         <div class="card">
             <div class="card-body">

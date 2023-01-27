@@ -5,6 +5,27 @@
         </h1>
     </x-slot>
 
+    <x-slot name="breadcrumbs">
+        <li class="breadcrumb-item">
+            <Link href="{{ route('dashboard.index') }}">
+                Home
+            </Link>
+        </li>
+        <li class="breadcrumb-item">
+            <Link href="{{ route('master.members.index') }}">
+                Members
+            </Link>
+        </li>
+        <li class="breadcrumb-item">
+            <Link href="{{ route('master.members.show', $member->id) }}">
+                {{ $member->name }}
+            </Link>
+        </li>
+        <li class="breadcrumb-item active">
+            {{ __('Edit') }}
+        </li>
+    </x-slot>
+
     <x-splade-form dusk="edit-member" method="PATCH" :action="route('master.members.update', $member->id)" :default="$member">
         <div class="card">
             <div class="card-body">
