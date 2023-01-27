@@ -1,18 +1,18 @@
 <script setup>
+    import { watch } from 'vue';
+
     const props = defineProps({
         menu: {
             type: Object,
             default : {}
         }
     });
-
-    const sameLink = window.location.href === props.menu?.link;
 </script>
 
 <template>
     <li class="nav-item">
         <template v-if="menu.link !== '#'">
-            <Link :href="menu.link" class="nav-link" :class="{ 'active' : sameLink  }">
+            <Link :href="menu.link" class="nav-link" :class="{ 'active' : false  }">
                 <i :class="`nav-icon ${menu?.icon_class}`"></i>
                 <p>
                     {{ menu.label }}

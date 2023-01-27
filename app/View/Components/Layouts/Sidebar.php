@@ -58,7 +58,7 @@ class Sidebar extends Component
                 return $this->buildMenu($child);
             });
 
-        $menu['link'] = $menu['childs']->count() > 0 ? $this->defaultLink : ($link_type === "route" && $link !== $this->defaultLink ? route($link) : $this->defaultLink);
+        $menu['link'] = $menu['childs']->count() > 0 ? $this->defaultLink : ($link_type === "route" && $link !== $this->defaultLink ? (\Route::has($link) ? route($link) : $this->defaultLink) : $this->defaultLink);
         $menu['icon_class'] = isset($menu['icon_class']) ? $menu['icon_class'] : $this->defaultIconClass;
         $menu['label'] = isset($menu['label']) ? ($has_translation ? __($menu['label']) : $menu['label']) : "";
 
