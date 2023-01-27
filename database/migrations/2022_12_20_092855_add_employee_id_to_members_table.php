@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('members', function (Blueprint $table) {
             $table->after('name', function($table) {
-                $table->unsignedBigInteger('employee_id')->index('members_employee_id_foreign');
+                $table->unsignedBigInteger('employee_id')->nullable()->index('members_employee_id_foreign');
             });
         });
     }
