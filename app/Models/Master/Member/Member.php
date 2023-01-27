@@ -44,7 +44,7 @@ class Member extends Model
                 $data->created_by = auth()->check() ? auth()->user()->id : null;
             });
 
-            // "Deleting" data events
+            // "Updating" data events
             static::updating(function($data){
                 $data->updated_by = auth()->check() ? auth()->user()->id : null;
             });
