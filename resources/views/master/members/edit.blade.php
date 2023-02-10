@@ -53,7 +53,7 @@
                                 </div>
                                 <div class="col-12">
                                     <label for="is_active">{{ __('Active') }}</label>
-                                    <x-splade-checkbox id="is_active" name="is_active" value="1" :label="__('Active')" />
+                                    <x-splade-checkbox id="is_active" name="is_active" :value="$member->is_active" :label="__('Active')" />
                                 </div>
                                 <div class="col-xs-12 col-md-6">
                                     <x-splade-input id="birth_place" name="birth_place" type="text" :label="__('Birth Place')" :placeholder="__('Birth Place')" />
