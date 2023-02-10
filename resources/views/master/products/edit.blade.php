@@ -80,7 +80,7 @@
             </div>
 
             <div class="card-footer">
-                <Link href="{{ route('master.members.index') }}" class="btn btn-default">
+                <Link href="{{ route('master.products.index') }}" class="btn btn-default">
                     {{ __('Cancel') }}
                 </Link>
 
