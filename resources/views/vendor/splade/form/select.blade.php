@@ -1,3 +1,5 @@
+@props(['required' => false])
+
 <SpladeSelect
     {{ $attributes->only(['v-if', 'v-show']) }}
     :choices="@js($choicesOptions())"
