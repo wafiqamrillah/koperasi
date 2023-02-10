@@ -58,7 +58,13 @@ Route::middleware('splade')->group(function () {
 
                 // Products
                 Route::prefix('products')->name('products.')->group(function() {
-                    Route::get('{member}/delete', [Master\Member\MemberController::class, 'delete'])->name('delete');
+                    // Product Categories
+                    Route::prefix('categories')->name('categories.')->group(function() {
+                        Route::get('{category}/delete', [Master\Product\ProductCategoryController::class, 'delete'])->name('delete');
+                    });
+                    Route::resource('categories', Master\Product\ProductCategoryController::class);
+
+                    Route::get('{product}/delete', [Master\Product\ProductController::class, 'delete'])->name('delete');
                 });
                 Route::resource('products', Master\Product\ProductController::class);
             });
