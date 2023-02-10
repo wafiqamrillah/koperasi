@@ -9,16 +9,8 @@
         </Link>
     </div>
 
-    <x-splade-modal name="confirm-user-deletion">
+    <x-splade-modal name="confirm-user-deletion" :close-button="true" :title="__('Are you sure you want to delete your account?')">
         <x-splade-form dusk="confirm-user-deletion" method="delete" :action="route('profile.destroy')">
-            <div class="modal-header">
-                <h2 class="text-lg font-medium text-gray-900">
-                    {{ __('Are you sure you want to delete your account?') }}
-                </h2>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" dusk="close-modal-button" @click="modal.close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
             <div class="modal-body">
                 <p class="mt-1 text-sm text-gray-600">
                     {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
