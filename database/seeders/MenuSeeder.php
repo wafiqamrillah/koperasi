@@ -123,16 +123,16 @@ class MenuSeeder extends Seeder
                                 'childs' => collect([
                                     collect([
                                         'label' => 'Category List',
-                                        'link_type' => 'url',
-                                        'link' => '#',
+                                        'link_type' => 'route',
+                                        'link' => 'master.products.categories.index',
                                         'icon_class' => 'fa-solid fa-fw fa-cube',
                                         'has_translation' => true,
                                         'is_active' => true,
                                     ]),
                                     collect([
                                         'label' => 'Add Category',
-                                        'link_type' => 'url',
-                                        'link' => '#',
+                                        'link_type' => 'route',
+                                        'link' => 'master.products.categories.create',
                                         'icon_class' => 'fa-solid fa-fw fa-plus',
                                         'has_translation' => true,
                                         'is_active' => true,
