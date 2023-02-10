@@ -48,12 +48,19 @@ Route::middleware('splade')->group(function () {
         // Masters
         Route::name('master')->prefix('master')->group(function() {
             Route::name('.')->group(function() {
+                // Members
                 Route::prefix('members')->name('members.')->group(function() {
                     Route::get('import', [Master\Member\MemberController::class, 'import'])->name('import');
                     Route::post('importing', [Master\Member\MemberController::class, 'importing'])->name('importing');
                     Route::get('{member}/delete', [Master\Member\MemberController::class, 'delete'])->name('delete');
                 });
                 Route::resource('members', Master\Member\MemberController::class);
+
+                // Products
+                Route::prefix('products')->name('products.')->group(function() {
+                    Route::get('{member}/delete', [Master\Member\MemberController::class, 'delete'])->name('delete');
+                });
+                Route::resource('products', Master\Product\ProductController::class);
             });
         });
 
