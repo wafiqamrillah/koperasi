@@ -1,4 +1,4 @@
-@props(['readonly' => false])
+@props(['readonly' => false, 'required' => false])
 
 <div {{ $attributes->only(['v-if', 'v-show'])->class('form-check') }}>
     <input {{ $attributes->except(['v-if', 'v-show'])->only(['class'])->class(
@@ -15,7 +15,12 @@
     @if(trim($slot))
         <span class="form-check-label">{{ $slot }}</span>
     @else
-        <span class="form-check-label">{{ $label }}</span>
+        <span class="form-check-label">
+            {{ $label }}
+            @if ($required)
+                <span class="text-danger">*</span>
+            @endif
+        </span>
     @endif
 
     @includeWhen($help, 'splade::form.help', ['help' => $help])

@@ -1,3 +1,5 @@
+@props(['required' => false])
+
 <SpladeInput
     {{ $attributes->only(['v-if', 'v-show'])->class(['hidden' => $isHidden()]) }}
     :flatpickr="@js($flatpickrOptions())"
@@ -5,7 +7,7 @@
     v-model="{{ $vueModel() }}"
     #default="inputScope"
 >
-    @includeWhen($label, 'splade::form.label', ['label' => $label])
+    @includeWhen($label, 'splade::form.label', ['label' => $label, 'required' => $required])
 
     <div class="{{ ($prepend || $append) ? "input-group" : "form-group" }} mb-3">
         @if ($prepend)
@@ -24,7 +26,8 @@
                     'type' => $type,
                     'v-model' => $flatpickrOptions() ? null : $vueModel(),
                     'data-validation-key' => $validationKey(),
-                    ':class' => "{ 'is-invalid' : form.hasError(" .json_encode($name). ") }"
+                    ':class' => "{ 'is-invalid' : form.hasError(" .json_encode($name). ") }",
+                    'required' => $required ? true : false
                 ])
             }}
             />

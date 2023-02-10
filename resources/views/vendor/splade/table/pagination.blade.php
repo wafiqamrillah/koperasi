@@ -93,14 +93,14 @@
                 
                 {{-- Next Page Link --}}
                 <li class="page-item">
-                @if ($paginator->onFirstPage())
-                    <Link class="page-link" dusk="pagination-next" href="{{ $paginator->nextPageUrl() }}" rel="next" aria-disabled="false" aria-label="{{ __('pagination.next') }}">
-                        &raquo;
-                    </Link>
-                @else
+                @if ($paginator->onLastPage())
                     <a class="page-link" href="#" aria-disabled="true" aria-label="{{ __('pagination.next') }}">
                         &raquo;
                     </a>
+                @else
+                    <Link class="page-link" dusk="pagination-next" href="{{ $paginator->nextPageUrl() }}" rel="next" aria-disabled="false" aria-label="{{ __('pagination.next') }}">
+                        &raquo;
+                    </Link>
                 @endif
                 </li>
             </ul>

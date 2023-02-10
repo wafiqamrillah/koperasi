@@ -1,3 +1,5 @@
+@props(['required' => false])
+
 <SpladeTextarea
     {{ $attributes->only(['v-if', 'v-show']) }}
     :autosize="@js($attributes->has('autosize') ? (bool) $attributes->get('autosize') : $defaultAutosizeValue)"
