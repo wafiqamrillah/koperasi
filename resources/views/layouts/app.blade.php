@@ -55,7 +55,7 @@
                 </footer>
                 
                 <!-- Sidebar Overlay -->
-                <div id="sidebar-overlay" @click.prevent="setToggle(false)"></div>
+                <div id="sidebar-overlay" @click.prevent="data.collapse = false"></div>
             </div>
         </div>
     </x-splade-data>    
