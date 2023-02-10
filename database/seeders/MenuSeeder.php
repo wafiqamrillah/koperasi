@@ -44,6 +44,7 @@ class MenuSeeder extends Seeder
         // is_active
 
         return collect([
+            // Dashboard
             collect([
                 'label' => 'Dashboard',
                 'link_type' => 'route',
@@ -52,6 +53,8 @@ class MenuSeeder extends Seeder
                 'has_translation' => true,
                 'is_active' => true
             ]),
+
+            // Master
             collect([
                 'label' => 'Master',
                 'link_type' => 'url',
@@ -62,11 +65,29 @@ class MenuSeeder extends Seeder
                 'childs' => collect([
                     collect([
                         'label' => 'Member',
-                        'link_type' => 'route',
-                        'link' => 'master.members.index',
+                        'link_type' => 'url',
+                        'link' => '#',
                         'icon_class' => 'fa-solid fa-fw fa-id-card',
                         'has_translation' => true,
                         'is_active' => true,
+                        'childs' => collect([
+                            collect([
+                                'label' => 'Member List',
+                                'link_type' => 'route',
+                                'link' => 'master.members.index',
+                                'icon_class' => 'fa-solid fa-fw fa-id-card',
+                                'has_translation' => true,
+                                'is_active' => true,
+                            ]),
+                            collect([
+                                'label' => 'Add Member',
+                                'link_type' => 'route',
+                                'link' => 'master.members.create',
+                                'icon_class' => 'fa-solid fa-fw fa-plus',
+                                'has_translation' => true,
+                                'is_active' => true,
+                            ]),
+                        ]),
                     ]),
                     collect([
                         'label' => 'Product',
@@ -122,6 +143,8 @@ class MenuSeeder extends Seeder
                     ])
                 ])
             ]),
+
+            // Stock
             collect([
                 'label' => 'Stock',
                 'link_type' => 'url',
@@ -130,6 +153,8 @@ class MenuSeeder extends Seeder
                 'has_translation' => false,
                 'is_active' => true
             ]),
+
+            // Settings
             collect([
                 'label' => 'Settings',
                 'link_type' => 'url',
