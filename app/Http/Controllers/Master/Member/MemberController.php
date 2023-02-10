@@ -147,11 +147,13 @@ class MemberController extends Controller
                     break;
             }
 
-            return \Toast::title($title)
+            \Toast::title($title)
                 ->message($message)
                 ->danger()
                 ->center()
                 ->backdrop();
+
+            return back();
         }
     }
 
@@ -163,7 +165,28 @@ class MemberController extends Controller
      */
     public function delete(Member $member)
     {
-        return view('master.members.delete', compact('member'));
+        try {
+            return view('master.members.delete', compact('member'));
+        } catch (\Exception $e) {
+            switch (get_class($e)) {
+                case \Illuminate\Database\Eloquent\ModelNotFoundException::class:
+                    $message = __("Data not found");
+                    $title = "Whoops!";
+                    break;
+                default:
+                    $message = $e->getMessage();
+                    $title = "Whoops!";
+                    break;
+            }
+
+            \Toast::title($title)
+                ->message($message)
+                ->danger()
+                ->center()
+                ->backdrop();
+
+            return redirect()->back();
+        }
     }
 
     /**
@@ -194,11 +217,13 @@ class MemberController extends Controller
                     break;
             }
 
-            return \Toast::title($title)
+            \Toast::title($title)
                 ->message($message)
                 ->danger()
                 ->center()
                 ->backdrop();
+
+            return back();
         }
     }
     

@@ -41,20 +41,20 @@
                         <div class="tab-pane" :class="{ 'active' : data.tab === 1 }" id="edit-member-identity" dusk="edit-member-identity">
                             <div class="row">
                                 <div class="col-xs-12 col-md-6">
-                                    <x-splade-input id="name" name="name" type="text" :label="__('Name')" :placeholder="__('Name')" />
+                                    <x-splade-input id="name" name="name" type="text" :label="__('Name')" :placeholder="__('Name')" required />
                                 </div>
                                 <div class="col-xs-12 col-md-6">
-                                    <x-splade-input id="id_card_number" name="id_card_number" type="text" :label="__('ID Card Number')" :placeholder="__('ID Card Number') . ' (Contoh : 32**************)'" />
+                                    <x-splade-input id="id_card_number" name="id_card_number" type="text" :label="__('ID Card Number')" :placeholder="__('ID Card Number') . ' (Contoh : 32**************)'" required />
                                 </div>
                                 <div class="col-12">
                                     <label for="is_active">{{ __('Active') }}</label>
                                     <x-splade-checkbox id="is_active" name="is_active" :label="__('Active')" />
                                 </div>
                                 <div class="col-xs-12 col-md-6">
-                                    <x-splade-input id="birth_place" name="birth_place" type="text" :label="__('Birth Place')" :placeholder="__('Birth Place')" />
+                                    <x-splade-input id="birth_place" name="birth_place" type="text" :label="__('Birth Place')" :placeholder="__('Birth Place')" required />
                                 </div>
                                 <div class="col-xs-12 col-md-6">
-                                    <x-splade-input id="birth_date" name="birth_date" date :label="__('Birth Date')" :placeholder="__('Birth Date')" />
+                                    <x-splade-input id="birth_date" name="birth_date" date :label="__('Birth Date')" :placeholder="__('Birth Date')" required />
                                 </div>
                                 <div class="col-6">
                                     <x-splade-input id="phone_number" name="phone_number" type="text" :label="__('Phone Number')" :placeholder="__('Phone Number')" />
