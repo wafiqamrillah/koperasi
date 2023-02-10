@@ -5,6 +5,7 @@ namespace App\Models\Master\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\{ Str };
 
 class Product extends Model
 {
@@ -36,6 +37,14 @@ class Product extends Model
         {
             // "Creating" data events
             static::creating(function($data){
+                if (!isset($data->number) || $data->number === '') {
+                    $last_product_number = optional(\App\Models\Master\Product\Product::select('number')->orderByDesc('number')->first())->number;
+                    $last_sequence = $last_product_number ? (int) Str::replace('P', '', $last_product_number) : 0;
+                    $product_number = sprintf('%010d', ($last_sequence + 1));
+
+                    $data->number = 'P'.$product_number;
+                }
+                
                 $data->created_by = auth()->check() ? auth()->user()->id : null;
             });
 
