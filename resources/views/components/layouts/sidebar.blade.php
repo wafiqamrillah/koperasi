@@ -1,4 +1,4 @@
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar sidebar-light-primary elevation-4">
     <Link href="/" class="brand-link">
         @if ($application_logo)
             <img src="{{ $application_logo }}" alt="Application Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
@@ -22,7 +22,7 @@
         
         <!-- Sidebar menus -->
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar nav-compact nav-child-indent flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
                 @foreach($menus as $menu)
                     {{-- <x-layouts.sidebar.menu :menu="collect($menu)" /> --}}
                     <SidebarMenu :menu="@js($menu)" />
