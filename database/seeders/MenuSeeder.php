@@ -64,7 +64,85 @@ class MenuSeeder extends Seeder
                         'label' => 'Member',
                         'link_type' => 'route',
                         'link' => 'master.members.index',
-                        'icon_class' => 'fa-solid fa-fw fa-users',
+                        'icon_class' => 'fa-solid fa-fw fa-id-card',
+                        'has_translation' => true,
+                        'is_active' => true,
+                    ]),
+                    collect([
+                        'label' => 'Product',
+                        'link_type' => 'url',
+                        'link' => '#',
+                        'icon_class' => 'fa-solid fa-fw fa-cubes',
+                        'has_translation' => true,
+                        'is_active' => true,
+                        'childs' => collect([
+                            collect([
+                                'label' => 'Product List',
+                                'link_type' => 'route',
+                                'link' => 'master.products.index',
+                                'icon_class' => 'fa-solid fa-fw fa-cubes',
+                                'has_translation' => true,
+                                'is_active' => true,
+                            ]),
+                            collect([
+                                'label' => 'Add Product',
+                                'link_type' => 'route',
+                                'link' => 'master.products.create',
+                                'icon_class' => 'fa-solid fa-fw fa-plus',
+                                'has_translation' => true,
+                                'is_active' => true,
+                            ]),
+                            collect([
+                                'label' => 'Categories',
+                                'link_type' => 'url',
+                                'link' => '#',
+                                'icon_class' => 'fa-solid fa-fw fa-cube',
+                                'has_translation' => true,
+                                'is_active' => true,
+                                'childs' => collect([
+                                    collect([
+                                        'label' => 'Category List',
+                                        'link_type' => 'url',
+                                        'link' => '#',
+                                        'icon_class' => 'fa-solid fa-fw fa-cube',
+                                        'has_translation' => true,
+                                        'is_active' => true,
+                                    ]),
+                                    collect([
+                                        'label' => 'Add Category',
+                                        'link_type' => 'url',
+                                        'link' => '#',
+                                        'icon_class' => 'fa-solid fa-fw fa-plus',
+                                        'has_translation' => true,
+                                        'is_active' => true,
+                                    ]),
+                                ])
+                            ]),
+                        ])
+                    ])
+                ])
+            ]),
+            collect([
+                'label' => 'Stock',
+                'link_type' => 'url',
+                'link' => '#',
+                'icon_class' => 'fa-solid fa-fw fa-boxes-stacked',
+                'has_translation' => false,
+                'is_active' => true
+            ]),
+            collect([
+                'label' => 'Settings',
+                'link_type' => 'url',
+                'link' => '#',
+                'icon_class' => 'fa-solid fa-fw fa-cog',
+                'has_translation' => false,
+                'is_active' => true,
+                'childs' => collect([
+                    collect([
+                        'label' => 'User Management',
+                        'link_type' => 'route',
+                        'link' => 'settings.users.index',
+                        'icon_class' => 'fa-solid fa-fw fa-user',
                         'has_translation' => true,
                         'is_active' => true,
                     ])
