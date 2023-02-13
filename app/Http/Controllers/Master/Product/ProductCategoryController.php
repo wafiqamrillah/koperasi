@@ -187,6 +187,33 @@ class ProductCategoryController extends Controller
      */
     public function destroy(ProductCategory $category)
     {
-        //
+        try {
+            $data = DB::transaction(function () use($category) {
+                $category->delete();
+
+                return $category;
+            });
+
+            return redirect()->route('master.products.categories.index')->with('success', __('Data has been deleted successfully.'));
+        } catch (\Exception $e) {
+            switch (get_class($e)) {
+                case \Illuminate\Database\Eloquent\ModelNotFoundException::class:
+                    $message = __("Data not found");
+                    $title = "Whoops!";
+                    break;
+                default:
+                    $message = $e->getMessage();
+                    $title = "Whoops!";
+                    break;
+            }
+
+            Toast::title($title)
+                ->message($message)
+                ->danger()
+                ->center()
+                ->backdrop();
+
+            return redirect()->back();
+        }
     }
 }
