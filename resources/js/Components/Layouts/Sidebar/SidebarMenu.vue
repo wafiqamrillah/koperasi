@@ -34,7 +34,7 @@
 </script>
 
 <template>
-    <li class="nav-item" :class="{ 'menu-open' : (menu?.childs ?? []).length > 0 && isActivated(menu) }">
+    <li class="nav-item" :class="{ 'menu-is-opening menu-open' : (menu?.childs ?? []).length > 0 && isActivated(menu) }">
         <template v-if="menu.link !== '#'">
             <Link :href="menu.link" class="nav-link" :class="{ 'active' : activated }">
                 <i :class="`nav-icon ${menu?.icon_class}`"></i>
@@ -59,7 +59,7 @@
         </template>
         
         <template v-if="(menu?.childs ? menu.childs : []).length > 0">
-            <ul class="nav nav-treeview" :style="{ 'display' : !activated ? 'none' : '' }">
+            <ul class="nav nav-treeview" :style="{ 'display' : !activated ? 'none' : 'block' }">
                 <template v-for="(child, index) in menu.childs" :key="index">
                     <SidebarMenu :menu="child" />
                 </template>
