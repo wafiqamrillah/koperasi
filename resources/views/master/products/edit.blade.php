@@ -62,6 +62,14 @@
                                     <x-splade-input id="name" name="name" type="text" :label="__('Name')" :placeholder="__('Name')" required />
                                 </div>
                                 <div class="col-xs-12 col-md-6">
+                                    <x-splade-select id="category_id" name="category_id" :label="__('Category')" :placeholder="__('Select category')">
+                                        <option value="">{{ __('Select category') }}</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </x-splade-select>
+                                </div>
+                                <div class="col-xs-12 col-md-6">
                                     <x-splade-input id="brand" name="brand" type="text" :label="__('Brand')" :placeholder="__('Brand')" />
                                 </div>
                                 <div class="col-12">
@@ -71,7 +79,7 @@
                                     <label for="is_active">
                                         {{ __('Active') }}
                                     </label>
-                                    <x-splade-checkbox id="is_active" name="is_active" :value="$product->is_active" :label="__('Active')" />
+                                    <x-splade-checkbox id="is_active" name="is_active" value="1" :label="__('Active')" />
                                 </div>
                             </div>
                         </div>

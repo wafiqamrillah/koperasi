@@ -21,6 +21,7 @@ class Product extends Model
     ];
 
     protected $guarded = [
+        'category_id',
         'created_by',
         'updated_by',
         'deleted_by'
@@ -38,7 +39,7 @@ class Product extends Model
             // "Creating" data events
             static::creating(function($data){
                 if (!isset($data->number) || $data->number === '') {
-                    $last_product_number = optional(\App\Models\Master\Product\Product::select('number')->orderByDesc('number')->first())->number;
+                    $last_product_number = optional(\App\Models\Master\Product\Product::withTrashed()->select('number')->orderByDesc('number')->first())->number;
                     $last_sequence = $last_product_number ? (int) Str::replace('P', '', $last_product_number) : 0;
                     $product_number = sprintf('%010d', ($last_sequence + 1));
 
@@ -58,6 +59,16 @@ class Product extends Model
                 $data->deleted_by = auth()->check() ? auth()->user()->id : null;
             });
         }
+
+    /**
+     * Get the category that owns the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category()
+    {
+        return $this->belongsTo(ProductCategory::class, 'category_id', 'id');
+    }
 
     /**
      * Get the creator that owns the Product

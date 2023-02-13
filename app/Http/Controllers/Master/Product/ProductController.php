@@ -6,9 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\{ DB };
 use ProtoneMedia\Splade\Facades\Toast;
+use DNS1D;
 
 // Models
-use App\Models\Master\Product\Product;
+use App\Models\Master\Product\{ Product, ProductCategory };
 
 // Requests
 use App\Http\Requests\Master\Product\{ StoreProductRequest, UpdateProductRequest };
@@ -37,7 +38,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('master.products.create');
+        $categories = ProductCategory::select(['id', 'name'])->get();
+
+        return view('master.products.create', compact('categories'));
     }
 
     /**
@@ -54,6 +57,10 @@ class ProductController extends Controller
             $data = DB::transaction(function () use($form) {
                 $product = new Product;
                 $product->fill($form);
+                
+                if (isset($form['category_id'])) {
+                    $product->category()->associate(ProductCategory::findOrFail($form['category_id']));
+                }
 
                 $product->save();
 
@@ -91,7 +98,9 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return view('master.products.show', compact('product'));
+        $barcodePNGPath = $product->barcode ? DNS1D::getBarcodePNG($product->barcode, 'C128', 3, 33, [1,1,1]) : false;
+
+        return view('master.products.show', compact('product', 'barcodePNGPath'));
     }
 
     /**
@@ -102,7 +111,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('master.products.edit', compact('product'));
+        $categories = ProductCategory::select(['id', 'name'])->get();
+
+        return view('master.products.edit', compact('product', 'categories'));
     }
 
     /**
@@ -119,6 +130,12 @@ class ProductController extends Controller
 
             $data = DB::transaction(function() use($form, $product) {
                 $product->fill($form);
+                
+                if (!isset($form['category_id'])) {
+                    $product->category()->dissociate();
+                } else {
+                    $product->category()->associate(ProductCategory::findOrFail($form['category_id']));
+                }
 
                 $product->save();
 

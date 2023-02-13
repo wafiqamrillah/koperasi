@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Master\Product;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Master\Product\Product;
+use App\Models\Master\Product\{ Product, ProductCategory };
 
 class UpdateProductRequest extends FormRequest
 {
@@ -25,6 +25,7 @@ class UpdateProductRequest extends FormRequest
     public function rules()
     {
         $table = (new Product)->getTable();
+        $category_table = (new ProductCategory)->getTable();
 
         return [
             'number' => 'nullable|string|unique:' . $table . ',number' . ($this->route('product') ? ','.$this->route('product')->id : ''),
@@ -32,6 +33,7 @@ class UpdateProductRequest extends FormRequest
             'description' => 'nullable|string',
             'brand' => 'nullable|string',
             'is_active' => 'boolean',
+            'category_id' => 'nullable|exists:' . $category_table . ',id' ,
             'barcode' => 'nullable|string',
         ];
     }
