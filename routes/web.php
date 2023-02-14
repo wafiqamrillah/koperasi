@@ -67,6 +67,12 @@ Route::middleware('splade')->group(function () {
                     Route::get('{product}/delete', [Master\Product\ProductController::class, 'delete'])->name('delete');
                 });
                 Route::resource('products', Master\Product\ProductController::class);
+
+                // Units
+                Route::prefix('units')->name('units.')->group(function() {
+                    Route::get('{unit}/delete', [Master\Unit\UnitController::class, 'delete'])->name('delete')->withTrashed();
+                });
+                Route::resource('units', Master\Unit\UnitController::class)->withTrashed();
             });
         });
 
