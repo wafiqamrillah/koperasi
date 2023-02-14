@@ -1,5 +1,5 @@
 <x-splade-modal :close-button="true" :title="__('Delete').' '. __('category')">
-    <x-splade-form dusk="delete-product" method="DELETE" :action="route('master.products.categories.destroy', $category->id)">
+    <x-splade-form dusk="delete-product-category" method="DELETE" :action="route('master.products.categories.destroy', $category->id)">
         <div class="modal-body">
             <span>
                 {{ __("Are you sure you want to delete this data") }}?
