@@ -58,7 +58,7 @@
                                 </div>
                                 <div class="col-xs-12 col-md-6">
                                     <x-splade-select id="category_id" name="category_id" :label="__('Category')" :placeholder="__('Select category')">
-                                        <option value="" {{ !$product->category_id ? 'selected' : null }}>{{ __('Select category') }}</option>
+                                        <option value="">{{ __('Select category') }}</option>
                                         @foreach ($categories as $category)
                                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endforeach
