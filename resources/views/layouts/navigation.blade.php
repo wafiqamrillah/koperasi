@@ -20,11 +20,11 @@
                 </div>
                 <div class="dropdown-menu dropdown-menu-xl dropdown-menu-right" :class="{ 'show' : toggled }">
                     <x-splade-lazy url="{{ route('notifications.get') }}">
-                        <x-slot::placeholder>
+                        <x-slot:placeholder>
                             <span class="dropdown-item dropdown-header">
                                 <i class="fa-solid fa-circle-notch fa-spin"></i> Loading...
                             </span>
-                        </x-slot::placeholder>
+                        </x-slot:placeholder>
                     </x-splade-lazy>
                 </div>
             </li>
