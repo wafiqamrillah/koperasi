@@ -23,8 +23,6 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->registerPolicies();
-
         // Grant super user and developer to have all permissions
         Gate::before(function($user, $ability) {
             return $user->hasRole('super user') || $user->hasRole('developer') ? true : null;
