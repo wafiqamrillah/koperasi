@@ -11,6 +11,14 @@
                 <div class="col-12">
                     <x-splade-textarea id="description" name="description" :label="__('Description')" :placeholder="__('Description')" />
                 </div>
+                <div class="col-12">
+                    <x-splade-select id="types" name="type_id" :label="__('Type')" :placeholder="__('Select unit type')">
+                        <option value="">{{ __('Select unit type') }}</option>
+                        @foreach ($types as $type)
+                            <option value="{{ $type->id }}">{{ $type->name }}</option>
+                        @endforeach
+                    </x-splade-select>
+                </div>
             </div>
         </div>
 

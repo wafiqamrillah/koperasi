@@ -37,7 +37,9 @@ class UnitController extends Controller
      */
     public function create()
     {
-        return view('master.units.create');
+        $types = UnitType::get();
+
+        return view('master.units.create', compact('types'));
     }
 
     /**
@@ -54,6 +56,10 @@ class UnitController extends Controller
             $data = DB::transaction(function () use($form) {
                 $unit = new Unit;
                 $unit->fill($form);
+
+                if (isset($form['type_id'])) {
+                    $unit->type()->associate(UnitType::findOrFail($form['type_id']));
+                }
 
                 $unit->save();
                 
@@ -102,7 +108,9 @@ class UnitController extends Controller
      */
     public function edit(Unit $unit)
     {
-        return view('master.units.edit', compact('unit'));
+        $types = UnitType::get();
+
+        return view('master.units.edit', compact('unit', 'types'));
     }
 
     /**
@@ -119,6 +127,12 @@ class UnitController extends Controller
 
             $data = DB::transaction(function () use($form, $unit) {
                 $unit->fill($form);
+                
+                if (!isset($form['type_id'])) {
+                    $unit->type()->dissociate();
+                } else {
+                    $unit->type()->associate(UnitType::findOrFail($form['type_id']));
+                }
 
                 $unit->save();
                 

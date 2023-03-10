@@ -5,7 +5,7 @@ namespace App\Http\Requests\Master\Unit;
 use Illuminate\Foundation\Http\FormRequest;
 
 // Models
-use App\Models\Master\Unit\{ Unit };
+use App\Models\Master\Unit\{ Unit, UnitType };
 
 class StoreUnitRequest extends FormRequest
 {
@@ -27,11 +27,13 @@ class StoreUnitRequest extends FormRequest
     public function rules()
     {
         $table = (new Unit)->getTable();
+        $type_table = (new UnitType)->getTable();
 
         return [
             'name' => 'required|string|unique:' . $table . ',name',
             'code' => 'required|string|unique:' . $table . ',code',
-            'description' => 'nullable|string'
+            'description' => 'nullable|string',
+            'type_id' => 'nullable|exists:' . $type_table . ',id'
         ];
     }
 }
