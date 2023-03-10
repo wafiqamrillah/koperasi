@@ -7,15 +7,17 @@
 >
     @includeWhen($label, 'splade::form.label', ['label' => $label])
 
-    <textarea
-        {{ $attributes->except(['v-if', 'v-show', 'autosize'])->class(
-            'form-control'
-        )->merge([
-            'name' => $name,
-            'v-model' => $vueModel(),
-            'data-validation-key' => $validationKey(),
-        ]) }}
-    />
+    <div class="form-group mb-3">
+        <textarea
+            {{ $attributes->except(['v-if', 'v-show', 'autosize'])->class(
+                'form-control'
+            )->merge([
+                'name' => $name,
+                'v-model' => $vueModel(),
+                'data-validation-key' => $validationKey(),
+            ]) }}
+        />
+    </div>
 
     @includeWhen($help, 'splade::form.help', ['help' => $help])
     @includeWhen($showErrors, 'splade::form.error', ['name' => $validationKey()])
