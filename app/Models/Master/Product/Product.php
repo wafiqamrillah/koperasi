@@ -71,6 +71,16 @@ class Product extends Model
     }
 
     /**
+     * Get the default unit that owns the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function default_unit()
+    {
+        return $this->belongsTo(\App\Master\Unit\Unit::class, 'default_unit_id', 'id');
+    }
+
+    /**
      * Get the creator that owns the Product
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
