@@ -17,4 +17,14 @@ class Unit extends Model
     ];
 
     protected $guarded = [];
+
+    /**
+     * Get the type that owns the Unit
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function type()
+    {
+        return $this->belongsTo(UnitType::class, 'type_id', 'id');
+    }
 }

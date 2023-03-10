@@ -36,7 +36,7 @@ class UserTable extends AbstractTable
      */
     public function for()
     {
-        return User::query();
+        return User::query()->with('member');
     }
 
     /**
@@ -50,9 +50,19 @@ class UserTable extends AbstractTable
         $table
             ->withGlobalSearch(columns: ['name', 'email'])
             ->defaultSort('name')
-            ->column(key: 'name', searchable: true, sortable: true, canBeHidden: true)
-            ->column(key: 'email', searchable: true, sortable: true, canBeHidden: true)
-            ->column(key: 'profile_photo_path', searchable: true, sortable: true, canBeHidden: true)
+            ->column(
+                key: 'name',
+                searchable: true,
+                sortable: true,
+                canBeHidden: true
+            )
+            ->column(
+                key: 'email',
+                searchable: true,
+                sortable: true,
+                canBeHidden: true
+            )
+            ->column('action')
             ->bulkAction(
                 label: 'Touch timestamp',
                 each: fn (User $user) => $user->touch(),

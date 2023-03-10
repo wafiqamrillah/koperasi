@@ -70,6 +70,11 @@ Route::middleware('splade')->group(function () {
 
                 // Units
                 Route::prefix('units')->name('units.')->group(function() {
+                    Route::prefix('types')->name('types.')->group(function() {
+                        Route::get('{type}/delete', [Master\Unit\UnitTypeController::class, 'delete'])->name('delete');
+                    });
+                    Route::resource('types', Master\Unit\UnitTypeController::class);
+
                     Route::get('{unit}/delete', [Master\Unit\UnitController::class, 'delete'])->name('delete')->withTrashed();
                 });
                 Route::resource('units', Master\Unit\UnitController::class)->withTrashed();

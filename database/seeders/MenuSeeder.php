@@ -115,32 +115,40 @@ class MenuSeeder extends Seeder
                             ]),
                             collect([
                                 'label' => 'Categories',
-                                'link_type' => 'url',
-                                'link' => '#',
+                                'link_type' => 'route',
+                                'link' => 'master.products.categories.index',
                                 'icon_class' => 'fa-solid fa-fw fa-cube',
                                 'has_translation' => true,
-                                'is_active' => true,
-                                'childs' => collect([
-                                    collect([
-                                        'label' => 'Category List',
-                                        'link_type' => 'route',
-                                        'link' => 'master.products.categories.index',
-                                        'icon_class' => 'fa-solid fa-fw fa-cube',
-                                        'has_translation' => true,
-                                        'is_active' => true,
-                                    ]),
-                                    collect([
-                                        'label' => 'Add Category',
-                                        'link_type' => 'route',
-                                        'link' => 'master.products.categories.create',
-                                        'icon_class' => 'fa-solid fa-fw fa-plus',
-                                        'has_translation' => true,
-                                        'is_active' => true,
-                                    ]),
-                                ])
+                                'is_active' => true
                             ]),
                         ])
-                    ])
+                    ]),
+                    collect([
+                        'label' => 'Unit',
+                        'link_type' => 'url',
+                        'link' => '#',
+                        'icon_class' => 'fa-solid fa-fw fa-scale-balanced',
+                        'has_translation' => true,
+                        'is_active' => true,
+                        'childs' => collect([
+                            collect([
+                                'label' => 'Unit List',
+                                'link_type' => 'route',
+                                'link' => 'master.units.index',
+                                'icon_class' => 'fa-solid fa-fw fa-scale-balanced',
+                                'has_translation' => true,
+                                'is_active' => true
+                            ]),
+                            collect([
+                                'label' => 'Unit Type',
+                                'link_type' => 'route',
+                                'link' => 'master.units.types.index',
+                                'icon_class' => 'fa-solid fa-fw fa-scale-balanced',
+                                'has_translation' => true,
+                                'is_active' => true
+                            ]),
+                        ]),
+                    ]),
                 ])
             ]),
 
