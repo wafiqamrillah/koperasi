@@ -4,6 +4,10 @@
 /node_modules
 /public/hot
 /public/storage
+/public/webfonts
+/public/js
+/public/css
+/public/images
 /storage/*.key
 .env
 vendor/

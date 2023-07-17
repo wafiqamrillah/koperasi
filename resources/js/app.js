@@ -1,6 +1,8 @@
 import Alpine from 'alpinejs'
+import jQuery from 'jquery';
 
-window.Alpine = Alpine
+// Preparting Alpine
+window.Alpine = Alpine;
 
 window.axios = require("axios");
 
@@ -57,4 +59,15 @@ window.permissions = () => {
     }
 };
 
-Alpine.start()
+Alpine.start();
+
+// Preparing jQuery
+window.jQuery = jQuery;
+// See https://github.com/alpinejs/alpine/pull/2063
+// This change would allow to enable compability with jQuery event system
+document.addEventListener('alpine:init', () => {
+    Alpine.setListenerManipulators(
+        (target, eventName, handler, options, modifiers) => { jQuery(target).on(eventName, handler); },
+        (target, eventName, handler, options) => { jQuery(target).off(eventName, handler); }
+    );
+});
