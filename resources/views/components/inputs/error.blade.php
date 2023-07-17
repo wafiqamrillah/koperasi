@@ -1,5 +1,5 @@
 @props(['field'])
 
-@if($errors->has($field))
+@foreach ($errors->get($field) as $message)
     <span class="error">{{ $message }}</span>
-@endif
+@endforeach
