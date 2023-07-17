@@ -21,7 +21,7 @@ class ConfirmedEmailControllerTest extends TestCase
         $this->withoutExceptionHandling();
         $this->expectException(HttpException::class);
 
-        $this->get($this->temporarySignedUri(create_user(), 'new.email@example.com').'invalid');
+        $this->get($this->temporarySignedUri(create_user(), 'new.email@example.com') . 'invalid');
     }
 
     /** @test */

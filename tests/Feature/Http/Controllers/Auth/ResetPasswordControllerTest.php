@@ -139,7 +139,7 @@ class ResetPasswordControllerTest extends TestCase
 
         $validParams = $this->validParams($user, [
             'password' => $this->password,
-            'password_confirmation' => $this->password.'-non-matching-password',
+            'password_confirmation' => $this->password . '-non-matching-password',
         ]);
 
         $response = $this->from(route('password.reset', ['token' => $validParams['token']]))

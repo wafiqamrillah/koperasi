@@ -99,7 +99,7 @@ class AcceptedInvitationComponentTest extends TestCase
         $request = $this->buildRequest($this->user);
         Livewire::test(AcceptedInvitationComponent::class, ['request' => $request, 'user' => $this->user])
             ->set('newPassword', $this->password)
-            ->set('newPasswordConfirmation', $this->password.'invalid-password')
+            ->set('newPasswordConfirmation', $this->password . 'invalid-password')
             ->call('submit')
             ->assertHasErrors(['newPassword' => 'app\_rules\_password_rule']);
 

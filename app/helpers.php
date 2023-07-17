@@ -1,6 +1,6 @@
 <?php
 
-if (! function_exists('msg_success')) {
+if (!function_exists('msg_success')) {
     /**
      * Flash success message.
      *
@@ -13,7 +13,7 @@ if (! function_exists('msg_success')) {
     }
 }
 
-if (! function_exists('msg_error')) {
+if (!function_exists('msg_error')) {
     /**
      * Flash error message.
      *

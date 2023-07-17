@@ -19,7 +19,7 @@ class ConfirmedEmailController extends Controller
     {
         auth()->logout();
 
-        abort_if(! $request->hasValidSignature(), Response::HTTP_FORBIDDEN);
+        abort_if(!$request->hasValidSignature(), Response::HTTP_FORBIDDEN);
 
         $user = User::find($request->user);
 

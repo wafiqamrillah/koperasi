@@ -19,7 +19,7 @@ class VisibleToScope implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-        if (! auth()->hasUser()) {
+        if (!auth()->hasUser()) {
             return $builder;
         }
 
@@ -45,13 +45,13 @@ class VisibleToScope implements Scope
      */
     public function returnEarlyPermission($user, $model)
     {
-        $permission = $user->getPermission($model->getTable().'.index');
+        $permission = $user->getPermission($model->getTable() . '.index');
 
-        if (! $permission->pivot->owner_restricted === true) {
+        if (!$permission->pivot->owner_restricted === true) {
             return true;
         }
 
-        if (! Schema::hasColumn($model->getTable(), AppServiceProvider::OWNER_FIELD)) {
+        if (!Schema::hasColumn($model->getTable(), AppServiceProvider::OWNER_FIELD)) {
             return true;
         }
 

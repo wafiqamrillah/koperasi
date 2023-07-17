@@ -50,7 +50,7 @@ class AcceptedInvitationAuthTest extends TestCase
 
         $url = app()->make(UrlGenerator::class);
 
-        $request = $this->createRequestWithSignedRoute($url, $user->id.'invalid');
+        $request = $this->createRequestWithSignedRoute($url, $user->id . 'invalid');
 
         $url->setRequest($request);
 

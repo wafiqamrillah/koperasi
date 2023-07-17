@@ -137,7 +137,7 @@ class UpdatePasswordTest extends TestCase
         Livewire::actingAs($this->user)
             ->test(UpdatePassword::class)
             ->set('newPassword', $this->password)
-            ->set('newPasswordConfirmation', $this->password.'invalid-password')
+            ->set('newPasswordConfirmation', $this->password . 'invalid-password')
             ->call('submit');
 
         $this->assertTrue(Hash::check('password', $this->user->fresh()->password));

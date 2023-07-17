@@ -23,6 +23,6 @@ class ResizeImage implements ShouldQueue
 
         Image::make($file)
             ->resize(100, 100)
-            ->save(config('filesystems.disks.avatar.root')."/{$event->user->image}");
+            ->save(config('filesystems.disks.avatar.root') . "/{$event->user->image}");
     }
 }

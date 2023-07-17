@@ -39,7 +39,7 @@ class PasswordRule implements ImplicitRule
     {
         $validator = Validator::make([
             $attribute => $value,
-            $attribute.'_confirmation' => $this->confirmationValue,
+            $attribute . '_confirmation' => $this->confirmationValue,
         ], [
             $attribute => ['required', 'confirmed', Password::min(AppServiceProvider::MIN_PASSWORD_LENGTH)->uncompromised()],
         ]);

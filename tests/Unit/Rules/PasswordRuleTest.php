@@ -45,7 +45,7 @@ class PasswordRuleTest extends TestCase
     /** @test */
     public function password_must_be_confirmed()
     {
-        $rule = new PasswordRule($this->password.'-not-confirmed');
+        $rule = new PasswordRule($this->password . '-not-confirmed');
 
         $this->assertFalse($rule->passes('password', $this->password));
     }

@@ -54,7 +54,7 @@ class EditRoleComponent extends Component
 
         $this->role->save();
 
-        if (! $this->role->isAdmin()) {
+        if (!$this->role->isAdmin()) {
             $this->role->updatePermissions($this->permissions);
         }
 
@@ -74,7 +74,7 @@ class EditRoleComponent extends Component
             'role.name' => [
                 'required',
                 Rule::unique('roles', 'name')->ignore($this->role->id),
-                'unique:roles,id,'.$this->role->id,
+                'unique:roles,id,' . $this->role->id,
             ],
             'role.label' => [
                 'required',

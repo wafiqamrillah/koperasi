@@ -152,7 +152,7 @@ class ComponentsScaffoldMakeCommand extends Command
             'index' => "Route::get('{$argumentPlu}', Index{$this->ucArgument}Component::class)->name('{$argumentPlu}.index')",
             'create' => "Route::get('{$argumentPlu}/create', Create{$this->ucArgument}Component::class)->name('{$argumentPlu}.create')",
             'show' => "Route::get('{$argumentPlu}', Show{$this->ucArgument}Component::class)->name('{$argumentPlu}.show')",
-            'edit' => "Route::get('{$argumentPlu}/{".strtolower($this->argument('name'))."}/edit', Edit{$this->ucArgument}Component::class)->name('{$argumentPlu}.edit')",
+            'edit' => "Route::get('{$argumentPlu}/{" . strtolower($this->argument('name')) . "}/edit', Edit{$this->ucArgument}Component::class)->name('{$argumentPlu}.edit')",
         ];
 
         $this->getAppliedOptions()

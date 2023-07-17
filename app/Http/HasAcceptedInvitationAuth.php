@@ -18,7 +18,7 @@ trait HasAcceptedInvitationAuth
      */
     public function authorizeInvitation(Request $request, User $user = null)
     {
-        if (! $request->hasValidSignature()) {
+        if (!$request->hasValidSignature()) {
             abort(Response::HTTP_FORBIDDEN, 'The link does not have a valid signature or it is expired.');
         }
 

@@ -47,7 +47,7 @@ class ForgotPasswordControllerTest extends TestCase
             [$user],
             ResetPassword::class,
             function ($notification, $channels) {
-                return ! empty($notification->token);
+                return !empty($notification->token);
             }
         );
     }

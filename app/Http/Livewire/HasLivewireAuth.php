@@ -63,6 +63,6 @@ trait HasLivewireAuth
         }
 
         $splitted = explode('-', self::getName());
-        $this->permissionName = Str::plural($splitted[1]).'.'.$splitted[0];
+        $this->permissionName = Str::plural($splitted[1]) . '.' . $splitted[0];
     }
 }

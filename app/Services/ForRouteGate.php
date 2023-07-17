@@ -27,7 +27,7 @@ class ForRouteGate
             return false;
         }
 
-        if (! Str::contains($permissionName, ['show', 'edit', 'delete'])) {
+        if (!Str::contains($permissionName, ['show', 'edit', 'delete'])) {
             return $user->hasPermission($permissionName);
         }
 

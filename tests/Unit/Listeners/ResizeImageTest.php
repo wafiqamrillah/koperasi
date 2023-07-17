@@ -25,7 +25,7 @@ class ResizeImageTest extends TestCase
         $listener = new ResizeImage();
         $listener->handle($event);
 
-        $imageProperties = getimagesize(config('filesystems.disks.avatar.root')."/{$user->image}");
+        $imageProperties = getimagesize(config('filesystems.disks.avatar.root') . "/{$user->image}");
 
         $this->assertSame(100, $imageProperties[0]);
         $this->assertSame(100, $imageProperties[1]);

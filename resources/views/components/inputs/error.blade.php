@@ -1,5 +1,5 @@
 @props(['field'])
 
-@error($field)
+@if($errors->has($field))
     <span class="error">{{ $message }}</span>
-@enderror
+@endif
