@@ -19,7 +19,13 @@
                 <span class="d-none d-md-inline">{{ auth()->user()->email }}</span>
             </a>
 
-            <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right" x-show="open" x-bind:class="{ 'show': open }" x-on:click.away="open= false" x-cloak>
+            <ul 
+                x-show="open"
+                x-bind:class="{ 'show': open }"
+                x-on:click.away="open= false"
+                x-cloak
+                x-transition.scale.origin.top.right
+                class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <li class="user-header bg-primary">
                     <img src="{{ auth()->user()->imageFile }}" class="img-circle elevation-2">
                     <p>

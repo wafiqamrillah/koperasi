@@ -3,10 +3,10 @@
 [x-cloak] { display: none; }
 
 .fade {
-    opacity: 1;
-    transition: opacity .25s ease-in-out;
     -moz-transition: opacity .25s ease-in-out;
     -webkit-transition: opacity .25s ease-in-out;
+    opacity: 1;
+    transition: opacity .25s ease-in-out;
 }
  
 .fade:hover {
