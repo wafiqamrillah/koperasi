@@ -1,7 +1,7 @@
 @extends('layouts.guest-app')
 
 @section('title')
-    Verify Email Address
+    {{ trans('Verify Email Address') }}
 @endsection
 
 @section('content')

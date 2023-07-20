@@ -1,7 +1,7 @@
 @extends('layouts.guest-app')
 
 @section('title')
-    Reset Password
+    {{ __('Reset Password') }}
 @endsection
 
 @section('content')
@@ -14,7 +14,7 @@
         <form method="POST" action="{{ route('password.email') }}">
             @csrf
 
-            <x-inputs.email required="required" autofocus />
+            <x-inputs.email required="required" :placeholder="ucfirst(trans('validation.attributes.email'))" autofocus />
 
             <div class="row">
                 <div class="offset-4 col-8">
@@ -23,7 +23,7 @@
             </div>
         </form>
         <p class="mt-3 mb-1">
-            <a href="{{ route('login') }}">{{ __('Sing In') }}</a>
+            <a href="{{ route('login') }}">{{ __('Login') }}</a>
         </p>
     </div>
 </div>

@@ -1,5 +1,5 @@
 @section('title')
-    Unauthorized
+    {{ __('Unauthorized') }}
 @endsection
 
 @extends('errors.app')
@@ -9,7 +9,7 @@
     <div class="card-body login-card-body">
         <h3><i class="fas fa-exclamation-triangle text-warning"></i> Unauthorized</h3>
         <p>
-            {{ $exception->getMessage() ?: 'You are not authorized.' }}
+            {{ $exception->getMessage() ?: __('You are not authorized.') }}
         </p>
     </div>
 </div>

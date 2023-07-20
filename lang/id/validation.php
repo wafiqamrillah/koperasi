@@ -181,6 +181,8 @@ return [
         'month'                    => 'bulan',
         'name'                     => 'nama',
         'national_code'            => 'kode nasional',
+        'newPassword'              => 'password baru',
+        'newPasswordConfirmation'  => 'konfirmasi password baru',
         'number'                   => 'nomor',
         'password'                 => 'kata sandi',
         'password_confirmation'    => 'konfirmasi kata sandi',

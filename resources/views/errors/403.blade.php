@@ -1,5 +1,5 @@
 @section('title')
-    Forbidden
+    {{ __('Forbidden') }}
 @endsection
 
 @extends('errors.app')
@@ -9,7 +9,7 @@
     <div class="card-body login-card-body">
         <h3><i class="fas fa-exclamation-triangle text-warning"></i> Forbidden</h3>
         <p>
-            {{ $exception->getMessage() ?: 'You are not allowed to see this page.' }}
+            {{ $exception->getMessage() ?: __('You are not allowed to see this page.') }}
         </p>
     </div>
 </div>

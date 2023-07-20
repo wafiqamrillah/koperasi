@@ -1,7 +1,7 @@
 @extends('layouts.guest-app')
 
 @section('title')
-    Password Confirmation
+    {{ __('Password Confirmation') }}
 @endsection
 
 @section('content')
@@ -12,11 +12,11 @@
         <form method="POST" action="{{ route('password.confirm') }}">
             @csrf
 
-            <x-inputs.password autofocus />
+            <x-inputs.password :placeholder="ucfirst(trans('validation.attributes.password_confirmation'))" autofocus />
 
             <div class="form-group row mb-0">
                 <div class="col-md-6 offset-md-4">
-                    <x-inputs.button text="trans('validation.attributes.password_confirmation')" class="btn-primary" />
+                    <x-inputs.button :text="ucfirst(trans('validation.attributes.password_confirmation'))" class="btn-primary" />
 
                     @if (Route::has('password.request'))
                         <a class="btn btn-link" href="{{ route('password.request') }}">

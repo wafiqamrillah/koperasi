@@ -1,5 +1,5 @@
 @section('title')
-    Too many requests
+    {{ __('Too many requests') }}
 @endsection
 
 @extends('errors.app')
@@ -9,7 +9,7 @@
     <div class="card-body login-card-body">
         <h3><i class="fas fa-exclamation-triangle text-warning"></i> Too many requests</h3>
         <p>
-            {{ $exception->getMessage() ?: 'Too many requests.' }}
+            {{ $exception->getMessage() ?: __('Too many requests.') }}
         </p>
     </div>
 </div>

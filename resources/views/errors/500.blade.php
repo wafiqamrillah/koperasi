@@ -1,5 +1,5 @@
 @section('title')
-    Server Error
+    {{ __('Server Error') }}
 @endsection
 
 @extends('errors.app')
