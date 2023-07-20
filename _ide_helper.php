@@ -17326,6 +17326,34 @@
         {
                         return \Illuminate\Support\Collection::debug();
         }
+                    /**
+         * 
+         *
+         * @see \Maatwebsite\Excel\Mixins\DownloadCollection::downloadExcel()
+         * @param string $fileName
+         * @param string|null $writerType
+         * @param mixed $withHeadings
+         * @param array $responseHeaders
+         * @static 
+         */ 
+        public static function downloadExcel($fileName, $writerType = null, $withHeadings = false, $responseHeaders = [])
+        {
+                        return \Illuminate\Support\Collection::downloadExcel($fileName, $writerType, $withHeadings, $responseHeaders);
+        }
+                    /**
+         * 
+         *
+         * @see \Maatwebsite\Excel\Mixins\StoreCollection::storeExcel()
+         * @param string $filePath
+         * @param string|null $disk
+         * @param string|null $writerType
+         * @param mixed $withHeadings
+         * @static 
+         */ 
+        public static function storeExcel($filePath, $disk = null, $writerType = null, $withHeadings = false)
+        {
+                        return \Illuminate\Support\Collection::storeExcel($filePath, $disk, $writerType, $withHeadings);
+        }
          
     }
      
@@ -18274,6 +18302,250 @@
      
 }
 
+    namespace Maatwebsite\Excel\Facades { 
+            /**
+     * 
+     *
+     */ 
+        class Excel {
+                    /**
+         * 
+         *
+         * @param object $export
+         * @param string|null $fileName
+         * @param string $writerType
+         * @param array $headers
+         * @return \Symfony\Component\HttpFoundation\BinaryFileResponse 
+         * @throws \PhpOffice\PhpSpreadsheet\Exception
+         * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
+         * @static 
+         */ 
+        public static function download($export, $fileName, $writerType = null, $headers = [])
+        {
+                        /** @var \Maatwebsite\Excel\Excel $instance */
+                        return $instance->download($export, $fileName, $writerType, $headers);
+        }
+                    /**
+         * 
+         *
+         * @param object $export
+         * @param string $filePath
+         * @param string|null $disk
+         * @param string $writerType
+         * @param mixed $diskOptions
+         * @return bool 
+         * @throws \PhpOffice\PhpSpreadsheet\Exception
+         * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
+         * @static 
+         */ 
+        public static function store($export, $filePath, $diskName = null, $writerType = null, $diskOptions = [])
+        {
+                        /** @var \Maatwebsite\Excel\Excel $instance */
+                        return $instance->store($export, $filePath, $diskName, $writerType, $diskOptions);
+        }
+                    /**
+         * 
+         *
+         * @param object $export
+         * @param string $filePath
+         * @param string|null $disk
+         * @param string $writerType
+         * @param mixed $diskOptions
+         * @return \Illuminate\Foundation\Bus\PendingDispatch 
+         * @static 
+         */ 
+        public static function queue($export, $filePath, $disk = null, $writerType = null, $diskOptions = [])
+        {
+                        /** @var \Maatwebsite\Excel\Excel $instance */
+                        return $instance->queue($export, $filePath, $disk, $writerType, $diskOptions);
+        }
+                    /**
+         * 
+         *
+         * @param object $export
+         * @param string $writerType
+         * @return string 
+         * @static 
+         */ 
+        public static function raw($export, $writerType)
+        {
+                        /** @var \Maatwebsite\Excel\Excel $instance */
+                        return $instance->raw($export, $writerType);
+        }
+                    /**
+         * 
+         *
+         * @param object $import
+         * @param string|\Symfony\Component\HttpFoundation\File\UploadedFile $filePath
+         * @param string|null $disk
+         * @param string|null $readerType
+         * @return \Maatwebsite\Excel\Reader|\Illuminate\Foundation\Bus\PendingDispatch 
+         * @static 
+         */ 
+        public static function import($import, $filePath, $disk = null, $readerType = null)
+        {
+                        /** @var \Maatwebsite\Excel\Excel $instance */
+                        return $instance->import($import, $filePath, $disk, $readerType);
+        }
+                    /**
+         * 
+         *
+         * @param object $import
+         * @param string|\Symfony\Component\HttpFoundation\File\UploadedFile $filePath
+         * @param string|null $disk
+         * @param string|null $readerType
+         * @return array 
+         * @static 
+         */ 
+        public static function toArray($import, $filePath, $disk = null, $readerType = null)
+        {
+                        /** @var \Maatwebsite\Excel\Excel $instance */
+                        return $instance->toArray($import, $filePath, $disk, $readerType);
+        }
+                    /**
+         * 
+         *
+         * @param object $import
+         * @param string|\Symfony\Component\HttpFoundation\File\UploadedFile $filePath
+         * @param string|null $disk
+         * @param string|null $readerType
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function toCollection($import, $filePath, $disk = null, $readerType = null)
+        {
+                        /** @var \Maatwebsite\Excel\Excel $instance */
+                        return $instance->toCollection($import, $filePath, $disk, $readerType);
+        }
+                    /**
+         * 
+         *
+         * @param \Illuminate\Contracts\Queue\ShouldQueue $import
+         * @param string|\Symfony\Component\HttpFoundation\File\UploadedFile $filePath
+         * @param string|null $disk
+         * @param string $readerType
+         * @return \Illuminate\Foundation\Bus\PendingDispatch 
+         * @static 
+         */ 
+        public static function queueImport($import, $filePath, $disk = null, $readerType = null)
+        {
+                        /** @var \Maatwebsite\Excel\Excel $instance */
+                        return $instance->queueImport($import, $filePath, $disk, $readerType);
+        }
+                    /**
+         * 
+         *
+         * @param string $concern
+         * @param callable $handler
+         * @param string $event
+         * @static 
+         */ 
+        public static function extend($concern, $handler, $event = 'Maatwebsite\\Excel\\Events\\BeforeWriting')
+        {
+                        return \Maatwebsite\Excel\Excel::extend($concern, $handler, $event);
+        }
+                    /**
+         * When asserting downloaded, stored, queued or imported, use regular expression
+         * to look for a matching file path.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function matchByRegex()
+        {
+                        /** @var \Maatwebsite\Excel\Fakes\ExcelFake $instance */
+                        $instance->matchByRegex();
+        }
+                    /**
+         * When asserting downloaded, stored, queued or imported, use regular string
+         * comparison for matching file path.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function doNotMatchByRegex()
+        {
+                        /** @var \Maatwebsite\Excel\Fakes\ExcelFake $instance */
+                        $instance->doNotMatchByRegex();
+        }
+                    /**
+         * 
+         *
+         * @param string $fileName
+         * @param callable|null $callback
+         * @static 
+         */ 
+        public static function assertDownloaded($fileName, $callback = null)
+        {
+                        /** @var \Maatwebsite\Excel\Fakes\ExcelFake $instance */
+                        return $instance->assertDownloaded($fileName, $callback);
+        }
+                    /**
+         * 
+         *
+         * @param string $filePath
+         * @param string|callable|null $disk
+         * @param callable|null $callback
+         * @static 
+         */ 
+        public static function assertStored($filePath, $disk = null, $callback = null)
+        {
+                        /** @var \Maatwebsite\Excel\Fakes\ExcelFake $instance */
+                        return $instance->assertStored($filePath, $disk, $callback);
+        }
+                    /**
+         * 
+         *
+         * @param string $filePath
+         * @param string|callable|null $disk
+         * @param callable|null $callback
+         * @static 
+         */ 
+        public static function assertQueued($filePath, $disk = null, $callback = null)
+        {
+                        /** @var \Maatwebsite\Excel\Fakes\ExcelFake $instance */
+                        return $instance->assertQueued($filePath, $disk, $callback);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function assertQueuedWithChain($chain)
+        {
+                        /** @var \Maatwebsite\Excel\Fakes\ExcelFake $instance */
+                        return $instance->assertQueuedWithChain($chain);
+        }
+                    /**
+         * 
+         *
+         * @param string $classname
+         * @param callable|null $callback
+         * @static 
+         */ 
+        public static function assertExportedInRaw($classname, $callback = null)
+        {
+                        /** @var \Maatwebsite\Excel\Fakes\ExcelFake $instance */
+                        return $instance->assertExportedInRaw($classname, $callback);
+        }
+                    /**
+         * 
+         *
+         * @param string $filePath
+         * @param string|callable|null $disk
+         * @param callable|null $callback
+         * @static 
+         */ 
+        public static function assertImported($filePath, $disk = null, $callback = null)
+        {
+                        /** @var \Maatwebsite\Excel\Fakes\ExcelFake $instance */
+                        return $instance->assertImported($filePath, $disk, $callback);
+        }
+         
+    }
+     
+}
+
     namespace Spatie\LaravelIgnition\Facades { 
             /**
      * 
@@ -18948,6 +19220,131 @@
         public static function slot($slot)
         {
                         return \Illuminate\View\View::slot($slot);
+        }
+         
+    }
+     
+}
+
+    namespace Illuminate\Database\Query { 
+            /**
+     * 
+     *
+     */ 
+        class Builder {
+                    /**
+         * 
+         *
+         * @see \Mediconesystems\LivewireDatatables\LivewireDatatablesServiceProvider::loadBuilderMacros()
+         * @param mixed $params
+         * @static 
+         */ 
+        public static function leftJoinIfNotJoined(...$params)
+        {
+                        return \Illuminate\Database\Query\Builder::leftJoinIfNotJoined(...$params);
+        }
+                    /**
+         * 
+         *
+         * @see \Mediconesystems\LivewireDatatables\LivewireDatatablesServiceProvider::loadBuilderMacros()
+         * @param mixed $params
+         * @static 
+         */ 
+        public static function groupIfNotGrouped(...$params)
+        {
+                        return \Illuminate\Database\Query\Builder::groupIfNotGrouped(...$params);
+        }
+                    /**
+         * Merges an array of join clauses and bindings.
+         *
+         * @param array $joins
+         * @param array $bindings
+         * @return void 
+         * @see \Reedware\LaravelRelationJoins\Mixins\MergeJoins::mergeJoins()
+         * @static 
+         */ 
+        public static function mergeJoins($joins, $bindings)
+        {
+                        \Illuminate\Database\Query\Builder::mergeJoins($joins, $bindings);
+        }
+                    /**
+         * Add an "on" clause to the join.
+         *
+         * @param \Closure|string $first
+         * @param string|null $operator
+         * @param string|null $second
+         * @param string $boolean
+         * @return \Illuminate\Database\Query\Builder 
+         * @see \Reedware\LaravelRelationJoins\Mixins\JoinOperations::on()
+         * @static 
+         */ 
+        public static function on($first, $operator = null, $second = null, $boolean = 'and')
+        {
+                        return \Illuminate\Database\Query\Builder::on($first, $operator, $second, $boolean);
+        }
+                    /**
+         * Add an "or on" clause to the join.
+         *
+         * @param \Closure|string $first
+         * @param string|null $operator
+         * @param string|null $second
+         * @return \Illuminate\Database\Query\Builder 
+         * @see \Reedware\LaravelRelationJoins\Mixins\JoinOperations::orOn()
+         * @static 
+         */ 
+        public static function orOn($first, $operator = null, $second = null)
+        {
+                        return \Illuminate\Database\Query\Builder::orOn($first, $operator, $second);
+        }
+         
+    }
+     
+}
+
+    namespace Illuminate\Database\Eloquent\Relations { 
+            /**
+     * 
+     *
+     */ 
+        class Relation {
+                    /**
+         * 
+         *
+         * @see \Mediconesystems\LivewireDatatables\LivewireDatatablesServiceProvider::loadRelationMacros()
+         * @param \Illuminate\Database\Eloquent\Builder $query
+         * @param \Illuminate\Database\Eloquent\Builder $parentQuery
+         * @param mixed $aggregate
+         * @param mixed $column
+         * @static 
+         */ 
+        public static function getRelationExistenceAggregatesQuery($query, $parentQuery, $aggregate, $column)
+        {
+                        return \Illuminate\Database\Eloquent\Relations\Relation::getRelationExistenceAggregatesQuery($query, $parentQuery, $aggregate, $column);
+        }
+                    /**
+         * 
+         *
+         * @see \Mediconesystems\LivewireDatatables\LivewireDatatablesServiceProvider::loadRelationMacros()
+         * @static 
+         */ 
+        public static function getRelationCountHashWithoutIncrementing()
+        {
+                        return \Illuminate\Database\Eloquent\Relations\Relation::getRelationCountHashWithoutIncrementing();
+        }
+                    /**
+         * Adds the constraints for a relationship join.
+         *
+         * @param \Illuminate\Database\Eloquent\Builder $query
+         * @param \Illuminate\Database\Eloquent\Builder $parentQuery
+         * @param string $type
+         * @param string|null $alias
+         * @return \Illuminate\Database\Eloquent\Builder 
+         * @see \Reedware\LaravelRelationJoins\Mixins\RelationJoinQueries::getRelationJoinQuery()
+         * @static 
+         */ 
+        public static function getRelationJoinQuery($query, $parentQuery, $type = 'inner', $alias = null)
+        {
+                        return \Illuminate\Database\Eloquent\Relations\Relation::getRelationJoinQuery($query, $parentQuery, $type, $alias);
         }
          
     }
@@ -20547,6 +20944,383 @@ namespace  {
             {
                                 /** @var \Illuminate\Database\Eloquent\Builder $instance */
                                 return $instance->mergeConstraintsFrom($from);
+            }
+             
+                /**
+             * 
+             *
+             * @see \Mediconesystems\LivewireDatatables\LivewireDatatablesServiceProvider::loadEloquentBuilderMacros()
+             * @param mixed $relations
+             * @param mixed $aggregate
+             * @param mixed $column
+             * @param mixed $alias
+             * @static 
+             */ 
+            public static function customWithAggregate($relations, $aggregate, $column, $alias = null)
+            {
+                                return \Illuminate\Database\Eloquent\Builder::customWithAggregate($relations, $aggregate, $column, $alias);
+            }
+             
+                /**
+             * 
+             *
+             * @see \Mediconesystems\LivewireDatatables\LivewireDatatablesServiceProvider::loadEloquentBuilderMacros()
+             * @param mixed $relation
+             * @param mixed $column
+             * @param mixed $aggregate
+             * @param mixed $operator
+             * @param mixed $count
+             * @static 
+             */ 
+            public static function hasAggregate($relation, $column, $aggregate, $operator = '>=', $count = 1)
+            {
+                                return \Illuminate\Database\Eloquent\Builder::hasAggregate($relation, $column, $aggregate, $operator, $count);
+            }
+             
+                /**
+             * Add a relationship join condition to the query.
+             *
+             * @param mixed $relation
+             * @param \Closure|array|null $callback
+             * @param string $type
+             * @param bool $through
+             * @param \Illuminate\Database\Eloquent\Builder $relatedQuery
+             * @param mixed $morphTypes
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @see \Reedware\LaravelRelationJoins\Mixins\JoinsRelationships::joinRelation()
+             * @static 
+             */ 
+            public static function joinRelation($relation, $callback = null, $type = 'inner', $through = false, $relatedQuery = null, $morphTypes = [])
+            {
+                                return \Illuminate\Database\Eloquent\Builder::joinRelation($relation, $callback, $type, $through, $relatedQuery, $morphTypes);
+            }
+             
+                /**
+             * Add nested relationship join conditions to the query.
+             *
+             * @param string $relations
+             * @param \Closure|array|null $callbacks
+             * @param string $type
+             * @param bool $through
+             * @param \Reedware\LaravelRelationJoins\MorphTypes $morphTypes
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @see \Reedware\LaravelRelationJoins\Mixins\JoinsRelationships::joinNestedRelation()
+             * @static 
+             */ 
+            public static function joinNestedRelation($relations, $callbacks, $type, $through, $morphTypes)
+            {
+                                return \Illuminate\Database\Eloquent\Builder::joinNestedRelation($relations, $callbacks, $type, $through, $morphTypes);
+            }
+             
+                /**
+             * Applies the eloquent scopes to the specified query.
+             *
+             * @param \Illuminate\Database\Query\Builder $joinQuery
+             * @return \Illuminate\Database\Query\Builder 
+             * @see \Reedware\LaravelRelationJoins\Mixins\JoinsRelationships::applyJoinScopes()
+             * @static 
+             */ 
+            public static function applyJoinScopes($joinQuery)
+            {
+                                return \Illuminate\Database\Eloquent\Builder::applyJoinScopes($joinQuery);
+            }
+             
+                /**
+             * Calls the provided callback on the join query.
+             *
+             * @param \Illuminate\Database\Query\Builder $joinQuery
+             * @param \Closure $callback
+             * @return void 
+             * @see \Reedware\LaravelRelationJoins\Mixins\JoinsRelationships::callJoinScope()
+             * @static 
+             */ 
+            public static function callJoinScope($joinQuery, $callback)
+            {
+                                \Illuminate\Database\Eloquent\Builder::callJoinScope($joinQuery, $callback);
+            }
+             
+                /**
+             * Returns the custom provided join type.
+             *
+             * @return string|null 
+             * @see \Reedware\LaravelRelationJoins\Mixins\JoinsRelationships::getJoinType()
+             * @static 
+             */ 
+            public static function getJoinType()
+            {
+                                return \Illuminate\Database\Eloquent\Builder::getJoinType();
+            }
+             
+                /**
+             * Add the "join relation" condition where clause to the query.
+             *
+             * @param \Illuminate\Database\Eloquent\Builder $joinQuery
+             * @param \Illuminate\Database\Eloquent\Relations\Relation $relation
+             * @param string $type
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @see \Reedware\LaravelRelationJoins\Mixins\JoinsRelationships::addJoinRelationWhere()
+             * @static 
+             */ 
+            public static function addJoinRelationWhere($joinQuery, $relation, $type)
+            {
+                                return \Illuminate\Database\Eloquent\Builder::addJoinRelationWhere($joinQuery, $relation, $type);
+            }
+             
+                /**
+             * Replaces the query builders in nested "where" clauses with join builders.
+             *
+             * @param \Illuminate\Database\Query\Builder $query
+             * @return void 
+             * @see \Reedware\LaravelRelationJoins\Mixins\JoinsRelationships::replaceWhereNestedQueryBuildersWithJoinBuilders()
+             * @static 
+             */ 
+            public static function replaceWhereNestedQueryBuildersWithJoinBuilders($query)
+            {
+                                \Illuminate\Database\Eloquent\Builder::replaceWhereNestedQueryBuildersWithJoinBuilders($query);
+            }
+             
+                /**
+             * Description.
+             *
+             * @param \Illuminate\Database\Eloquent\Relations\MorphTo $relation
+             * @param \Reedware\LaravelRelationJoins\MorphTypes $morphTypes
+             * @param \Illuminate\Database\Eloquent\Builder $relatedQuery
+             * @return array 
+             * @see \Reedware\LaravelRelationJoins\Mixins\JoinsRelationships::getBelongsToJoinRelation()
+             * @static 
+             */ 
+            public static function getBelongsToJoinRelation($relation, $morphTypes, $relatedQuery)
+            {
+                                return \Illuminate\Database\Eloquent\Builder::getBelongsToJoinRelation($relation, $morphTypes, $relatedQuery);
+            }
+             
+                /**
+             * Add a relationship left join condition to the query.
+             *
+             * @param string $relation
+             * @param \Closure|null $callback
+             * @param bool $through
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @see \Reedware\LaravelRelationJoins\Mixins\JoinsRelationships::leftJoinRelation()
+             * @static 
+             */ 
+            public static function leftJoinRelation($relation, $callback = null, $through = false)
+            {
+                                return \Illuminate\Database\Eloquent\Builder::leftJoinRelation($relation, $callback, $through);
+            }
+             
+                /**
+             * Add a relationship right join condition to the query.
+             *
+             * @param string $relation
+             * @param \Closure|null $callback
+             * @param bool $through
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @see \Reedware\LaravelRelationJoins\Mixins\JoinsRelationships::rightJoinRelation()
+             * @static 
+             */ 
+            public static function rightJoinRelation($relation, $callback = null, $through = false)
+            {
+                                return \Illuminate\Database\Eloquent\Builder::rightJoinRelation($relation, $callback, $through);
+            }
+             
+                /**
+             * Add a relationship cross join condition to the query.
+             *
+             * @param string $relation
+             * @param \Closure|null $callback
+             * @param bool $through
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @see \Reedware\LaravelRelationJoins\Mixins\JoinsRelationships::crossJoinRelation()
+             * @static 
+             */ 
+            public static function crossJoinRelation($relation, $callback = null, $through = false)
+            {
+                                return \Illuminate\Database\Eloquent\Builder::crossJoinRelation($relation, $callback, $through);
+            }
+             
+                /**
+             * Add a relationship join condition through a related model to the query.
+             *
+             * @param string $relation
+             * @param \Closure|null $callback
+             * @param string $type
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @see \Reedware\LaravelRelationJoins\Mixins\JoinsRelationships::joinThroughRelation()
+             * @static 
+             */ 
+            public static function joinThroughRelation($relation, $callback = null, $type = 'inner')
+            {
+                                return \Illuminate\Database\Eloquent\Builder::joinThroughRelation($relation, $callback, $type);
+            }
+             
+                /**
+             * Add a relationship left join condition through a related model to the query.
+             *
+             * @param string $relation
+             * @param \Closure|null $callback
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @see \Reedware\LaravelRelationJoins\Mixins\JoinsRelationships::leftJoinThroughRelation()
+             * @static 
+             */ 
+            public static function leftJoinThroughRelation($relation, $callback = null)
+            {
+                                return \Illuminate\Database\Eloquent\Builder::leftJoinThroughRelation($relation, $callback);
+            }
+             
+                /**
+             * Add a relationship right join condition through a related model to the query.
+             *
+             * @param string $relation
+             * @param \Closure|null $callback
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @see \Reedware\LaravelRelationJoins\Mixins\JoinsRelationships::rightJoinThroughRelation()
+             * @static 
+             */ 
+            public static function rightJoinThroughRelation($relation, $callback = null)
+            {
+                                return \Illuminate\Database\Eloquent\Builder::rightJoinThroughRelation($relation, $callback);
+            }
+             
+                /**
+             * Add a relationship cross join condition through a related model to the query.
+             *
+             * @param string $relation
+             * @param \Closure|null $callback
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @see \Reedware\LaravelRelationJoins\Mixins\JoinsRelationships::crossJoinThroughRelation()
+             * @static 
+             */ 
+            public static function crossJoinThroughRelation($relation, $callback = null)
+            {
+                                return \Illuminate\Database\Eloquent\Builder::crossJoinThroughRelation($relation, $callback);
+            }
+             
+                /**
+             * Add a morph to relationship join condition to the query.
+             *
+             * @param string|array $relation
+             * @param string|array $morphTypes
+             * @param \Closure|null $callback
+             * @param string $type
+             * @param bool $through
+             * @param \Illuminate\Database\Eloquent\Builder $relatedQuery
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @see \Reedware\LaravelRelationJoins\Mixins\JoinsRelationships::joinMorphRelation()
+             * @static 
+             */ 
+            public static function joinMorphRelation($relation, $morphTypes = [], $callback = null, $type = 'inner', $through = false, $relatedQuery = null)
+            {
+                                return \Illuminate\Database\Eloquent\Builder::joinMorphRelation($relation, $morphTypes, $callback, $type, $through, $relatedQuery);
+            }
+             
+                /**
+             * Add a morph to relationship left join condition to the query.
+             *
+             * @param string $relation
+             * @param string|array $morphTypes
+             * @param \Closure|null $callback
+             * @param bool $through
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @see \Reedware\LaravelRelationJoins\Mixins\JoinsRelationships::leftJoinMorphRelation()
+             * @static 
+             */ 
+            public static function leftJoinMorphRelation($relation, $morphTypes = [], $callback = null, $through = false)
+            {
+                                return \Illuminate\Database\Eloquent\Builder::leftJoinMorphRelation($relation, $morphTypes, $callback, $through);
+            }
+             
+                /**
+             * Add a morph to relationship right join condition to the query.
+             *
+             * @param string $relation
+             * @param string|array $morphTypes
+             * @param \Closure|null $callback
+             * @param bool $through
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @see \Reedware\LaravelRelationJoins\Mixins\JoinsRelationships::rightJoinMorphRelation()
+             * @static 
+             */ 
+            public static function rightJoinMorphRelation($relation, $morphTypes = [], $callback = null, $through = false)
+            {
+                                return \Illuminate\Database\Eloquent\Builder::rightJoinMorphRelation($relation, $morphTypes, $callback, $through);
+            }
+             
+                /**
+             * Add a morph to relationship cross join condition to the query.
+             *
+             * @param string $relation
+             * @param string|array $morphTypes
+             * @param \Closure|null $callback
+             * @param bool $through
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @see \Reedware\LaravelRelationJoins\Mixins\JoinsRelationships::crossJoinMorphRelation()
+             * @static 
+             */ 
+            public static function crossJoinMorphRelation($relation, $morphTypes = [], $callback = null, $through = false)
+            {
+                                return \Illuminate\Database\Eloquent\Builder::crossJoinMorphRelation($relation, $morphTypes, $callback, $through);
+            }
+             
+                /**
+             * Add a morph to relationship join condition through a related model to the query.
+             *
+             * @param string $relation
+             * @param string|array $morphTypes
+             * @param \Closure|null $callback
+             * @param string $type
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @see \Reedware\LaravelRelationJoins\Mixins\JoinsRelationships::joinThroughMorphRelation()
+             * @static 
+             */ 
+            public static function joinThroughMorphRelation($relation, $morphTypes = [], $callback = null, $type = 'inner')
+            {
+                                return \Illuminate\Database\Eloquent\Builder::joinThroughMorphRelation($relation, $morphTypes, $callback, $type);
+            }
+             
+                /**
+             * Add a morph to relationship left join condition through a related model to the query.
+             *
+             * @param string $relation
+             * @param string|array $morphTypes
+             * @param \Closure|null $callback
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @see \Reedware\LaravelRelationJoins\Mixins\JoinsRelationships::leftJoinThroughMorphRelation()
+             * @static 
+             */ 
+            public static function leftJoinThroughMorphRelation($relation, $morphTypes = [], $callback = null)
+            {
+                                return \Illuminate\Database\Eloquent\Builder::leftJoinThroughMorphRelation($relation, $morphTypes, $callback);
+            }
+             
+                /**
+             * Add a morph to relationship right join condition through a related model to the query.
+             *
+             * @param string $relation
+             * @param string|array $morphTypes
+             * @param \Closure|null $callback
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @see \Reedware\LaravelRelationJoins\Mixins\JoinsRelationships::rightJoinThroughMorphRelation()
+             * @static 
+             */ 
+            public static function rightJoinThroughMorphRelation($relation, $morphTypes = [], $callback = null)
+            {
+                                return \Illuminate\Database\Eloquent\Builder::rightJoinThroughMorphRelation($relation, $morphTypes, $callback);
+            }
+             
+                /**
+             * Add a morph to relationship cross join condition through a related model to the query.
+             *
+             * @param string $relation
+             * @param string|array $morphTypes
+             * @param \Closure|null $callback
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @see \Reedware\LaravelRelationJoins\Mixins\JoinsRelationships::crossJoinThroughMorphRelation()
+             * @static 
+             */ 
+            public static function crossJoinThroughMorphRelation($relation, $morphTypes = [], $callback = null)
+            {
+                                return \Illuminate\Database\Eloquent\Builder::crossJoinThroughMorphRelation($relation, $morphTypes, $callback);
             }
              
                 /**
@@ -22824,6 +23598,59 @@ namespace  {
                                 /** @var \Illuminate\Database\Query\Builder $instance */
                                 return $instance->macroCall($method, $parameters);
             }
+             
+                /**
+             * 
+             *
+             * @see \Mediconesystems\LivewireDatatables\LivewireDatatablesServiceProvider::loadBuilderMacros()
+             * @param mixed $params
+             * @static 
+             */ 
+            public static function leftJoinIfNotJoined(...$params)
+            {
+                                return \Illuminate\Database\Query\Builder::leftJoinIfNotJoined(...$params);
+            }
+             
+                /**
+             * 
+             *
+             * @see \Mediconesystems\LivewireDatatables\LivewireDatatablesServiceProvider::loadBuilderMacros()
+             * @param mixed $params
+             * @static 
+             */ 
+            public static function groupIfNotGrouped(...$params)
+            {
+                                return \Illuminate\Database\Query\Builder::groupIfNotGrouped(...$params);
+            }
+             
+                /**
+             * Merges an array of join clauses and bindings.
+             *
+             * @param array $joins
+             * @param array $bindings
+             * @return void 
+             * @see \Reedware\LaravelRelationJoins\Mixins\MergeJoins::mergeJoins()
+             * @static 
+             */ 
+            public static function mergeJoins($joins, $bindings)
+            {
+                                \Illuminate\Database\Query\Builder::mergeJoins($joins, $bindings);
+            }
+             
+                /**
+             * Add an "or on" clause to the join.
+             *
+             * @param \Closure|string $first
+             * @param string|null $operator
+             * @param string|null $second
+             * @return \Illuminate\Database\Query\Builder 
+             * @see \Reedware\LaravelRelationJoins\Mixins\JoinOperations::orOn()
+             * @static 
+             */ 
+            public static function orOn($first, $operator = null, $second = null)
+            {
+                                return \Illuminate\Database\Query\Builder::orOn($first, $operator, $second);
+            }
                     }
             class Event extends \Illuminate\Support\Facades\Event {}
             class File extends \Illuminate\Support\Facades\File {}
@@ -22850,6 +23677,7 @@ namespace  {
             class Debugbar extends \Barryvdh\Debugbar\Facades\Debugbar {}
             class Image extends \Intervention\Image\Facades\Image {}
             class Livewire extends \Livewire\Livewire {}
+            class Excel extends \Maatwebsite\Excel\Facades\Excel {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
      
 }
