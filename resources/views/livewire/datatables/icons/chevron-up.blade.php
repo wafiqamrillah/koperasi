@@ -1,0 +1,1 @@
+<i class="fas fa-chevron-up text-sm text-default"></i>

@@ -1,0 +1,1 @@
+<i class="far fa-check-circle text-sm text-success"></i>

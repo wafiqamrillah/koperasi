@@ -1,0 +1,1 @@
+<i class="fas fa-arrow-right text-sm text-default"></i>

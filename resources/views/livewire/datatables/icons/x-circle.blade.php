@@ -1,0 +1,1 @@
+<i class="far fa-times-circle text-sm text-danger"></i>
