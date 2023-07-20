@@ -22,13 +22,14 @@
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
         "barryvdh/laravel-ide-helper": "^2.12",
-        "spatie/laravel-ignition": "^2.0",
         "fakerphp/faker": "^1.18",
+        "laravel-lang/common": "^3.1",
         "laravel/tinker": "^2.7",
         "mockery/mockery": "^1.5",
         "nunomaduro/collision": "*",
         "nunomaduro/phpinsights": "^2.1",
-        "phpunit/phpunit": "^10.0"
+        "phpunit/phpunit": "^10.0",
+        "spatie/laravel-ignition": "^2.0"
     },
     "config": {
         "optimize-autoloader": true,
