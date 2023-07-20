@@ -1,4 +1,4 @@
-@props(['key'])
+@props(['key', 'placeholder' => null])
 
 <div class="input-group mb-3">
     <input
@@ -7,7 +7,7 @@
         type="text"
         name="{{ $key }}"
         class="form-control @errorClass($key)"
-        placeholder="{{ trans("validation.attributes.$key") }}"
+        placeholder="{{ $placeholder ?? trans("validation.attributes.$key") }}"
     >
 
     <x-inputs.fa fontAwesome="fa-edit" />

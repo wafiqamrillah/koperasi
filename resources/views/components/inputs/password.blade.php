@@ -1,4 +1,4 @@
-@props(['key' => 'password', 'showHidePasswordIcon' => false])
+@props(['key' => 'password', 'placeholder' => null, 'showHidePasswordIcon' => false])
 
 <div class="input-group mb-3" x-data="{ showPassword: false }">
     <input
@@ -7,7 +7,7 @@
         type="password"
         name="{{ $key }}"
         class="form-control @errorClass($key)"
-        placeholder="{{ trans("validation.attributes.$key") }}"
+        placeholder="{{ $placeholder ?? trans("validation.attributes.$key") }}"
         required
     >
 
