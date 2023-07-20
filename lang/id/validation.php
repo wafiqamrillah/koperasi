@@ -191,6 +191,7 @@ return [
         'province'                 => 'propinsi',
         'recaptcha_response_field' => 'bidang respons recaptcha',
         'remember'                 => 'ingat',
+        'remember_me'              => 'ingat saya',
         'restored_at'              => 'dipulihkan pada',
         'result_text_under_image'  => 'teks hasil di bawah gambar',
         'role'                     => 'peran',
