@@ -1,57 +1,56 @@
 <?php
 
-use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\Auth\VerificationController;
-use App\Http\Controllers\ConfirmedEmailController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Profile\UserController as ProfileUserController;
-use App\Http\Livewire\AcceptedInvitationComponent;
-use App\Http\Livewire\CreateRoleComponent;
-use App\Http\Livewire\CreateUserComponent;
-use App\Http\Livewire\EditRoleComponent;
-use App\Http\Livewire\EditUserComponent;
-use App\Http\Livewire\IndexRoleComponent;
-use App\Http\Livewire\IndexUserComponent;
+namespace App\Http;
 
-Route::post('login', [LoginController::class, 'login']);
-Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+use Illuminate\Support\Facades\Route;
 
-Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
-Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
-Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+// Authentication routes
+Route::get('/', [Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
+Route::post('login', [Controllers\Auth\LoginController::class, 'login']);
+Route::post('logout', [Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
-Route::get('email/verify', [VerificationController::class, 'show'])->name('verification.notice');
-Route::get('email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
-Route::post('email/resend', [VerificationController::class, 'resend'])->name('verification.resend');
+// Password
+Route::prefix('password')->name('password')->group(function () {
+    Route::get('reset', [Controllers\Auth\ForgotPasswordController::class, 'showLinkRequestForm'])->name('.request');
+    Route::post('email', [Controllers\Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])->name('.email');
+    Route::get('reset/{token}', [Controllers\Auth\ResetPasswordController::class, 'showResetForm'])->name('.reset');
+    Route::post('reset', [Controllers\Auth\ResetPasswordController::class, 'reset'])->name('.update');
+});
 
-Route::get('/', [LoginController::class, 'showLoginForm'])->name('login');
+// Email verification
+Route::prefix('email')->name('verification')->group(function () {
+    Route::get('verify', [Controllers\Auth\VerificationController::class, 'show'])->name('.notice');
+    Route::get('verify/{id}/{hash}', [Controllers\Auth\VerificationController::class, 'verify'])->name('.verify');
+    Route::post('resend', [Controllers\Auth\VerificationController::class, 'resend'])->name('.resend');
+});
 
-Route::get('accepted-invitations/create', AcceptedInvitationComponent::class)
+// Accepted invitations
+Route::get('accepted-invitations/create', Livewire\AcceptedInvitationComponent::class)
     ->name('accepted-invitations.create');
 
-Route::get('confirmed-emails/store', [ConfirmedEmailController::class, 'store'])
+// Confirmed emails
+Route::get('confirmed-emails/store', [Controllers\ConfirmedEmailController::class, 'store'])
     ->name('confirmed-emails.store');
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('home', [HomeController::class, 'index'])->name('home.index');
+// Authenticated routes
+Route::middleware('auth')->group(function () {
+    Route::get('home', [Controllers\HomeController::class, 'index'])->name('home.index');
 
-    Route::group(
-        ['prefix' => 'profile'],
-        function () {
-            Route::get('/', [ProfileUserController::class, 'index'])->name('profile.users.index');
-        }
-    );
+    Route::prefix('profile')->name('profile')->group(function () {
+        Route::get('/', [Controllers\Profile\UserController::class, 'index'])->name('.users.index');
+    });
 
-    Route::middleware(['authorization'])->group(function () {
-        Route::get('users', IndexUserComponent::class)->name('users.index');
-        Route::get('users/create', CreateUserComponent::class)->name('users.create');
-        Route::get('users/{user}/edit', EditUserComponent::class)->name('users.edit');
+    Route::middleware('authorization')->group(function () {
+        Route::prefix('users')->name('users')->group(function () {
+            Route::get('/', Livewire\IndexUserComponent::class)->name('.index');
+            Route::get('create', Livewire\CreateUserComponent::class)->name('.create');
+            Route::get('{user}/edit', Livewire\EditUserComponent::class)->name('.edit');
+        });
 
-        Route::get('roles', IndexRoleComponent::class)->name('roles.index');
-        Route::get('roles/create', CreateRoleComponent::class)->name('roles.create');
-        Route::get('roles/{role}/edit', EditRoleComponent::class)->name('roles.edit');
+        Route::prefix('roles')->name('roles')->group(function () {
+            Route::get('/', Livewire\IndexRoleComponent::class)->name('.index');
+            Route::get('create', Livewire\CreateRoleComponent::class)->name('.create');
+            Route::get('{role}/edit', Livewire\EditRoleComponent::class)->name('.edit');
+        });
     });
 });
