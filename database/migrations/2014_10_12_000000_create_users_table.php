@@ -15,16 +15,15 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger(AppServiceProvider::OWNER_FIELD);
-            $table->foreign(AppServiceProvider::OWNER_FIELD)->references('id')->on('users');
-            $table->unsignedBigInteger('role_id');
-            $table->foreign('role_id')->references('id')->on('roles');
-            $table->string('email')->unique();
+            $table->id();
+            $table->string('name', 255)->index();
+            $table->string('email')->unique()->index();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->rememberToken();
             $table->string('image')->nullable();
+            $table->foreignId('role_id')->constrained();
+            $table->foreignId(AppServiceProvider::OWNER_FIELD)->nullable()->constrained((new \App\Models\User)->getTable());
             $table->timestamps();
             $table->softDeletes();
         });

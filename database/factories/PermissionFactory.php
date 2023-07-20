@@ -22,8 +22,8 @@ class PermissionFactory extends Factory
     public function definition()
     {
         return [
-            'group' => strtoupper($this->faker->word),
             'name' => $this->faker->word,
+            'group' => strtoupper($this->faker->word),
             'description' => $this->faker->sentence,
         ];
     }
