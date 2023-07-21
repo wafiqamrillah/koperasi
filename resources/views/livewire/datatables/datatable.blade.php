@@ -2,8 +2,15 @@
     @includeIf($beforeTableSlot)
     
     @if($complex)
-        <div class="bg-gray-50 px-4 py-4 rounded-b-lg rounded-t-none shadow-lg border-2 @if($this->activeFilters) border-blue-500 @else border-transparent @endif @if($complex) border-t-0 @endif">
-            <livewire:complex-query :columns="$this->complexColumns" :persistKey="$this->persistKey" :savedQueries="method_exists($this, 'getSavedQueries') ? $this->getSavedQueries() : null" />
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <span>Query Builder</span>
+                </div>
+                <div class="card-body">
+                    <livewire:complex-query :columns="$this->complexColumns" :persistKey="$this->persistKey" :savedQueries="method_exists($this, 'getSavedQueries') ? $this->getSavedQueries() : null" />
+                </div>
+            </div>
         </div>
     @endif
 
