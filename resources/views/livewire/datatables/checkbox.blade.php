@@ -1,4 +1,4 @@
-<div class="form-check">
+<td class="form-check">
     <input
         type="checkbox"
         wire:model="selected"
@@ -6,4 +6,4 @@
         :checked="property_exists($this, 'pinnedRecords') && in_array($value, $this->pinnedRecords)"
         class="form-check-input"
     />
-</div>
+</td>
