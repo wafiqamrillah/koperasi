@@ -4,7 +4,7 @@
 @include('layouts._head')
 
 <body
-    class="hold-transition sidebar-mini"
+    class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed"
     x-data="window.nav.make()"
     :class="{ 'sidebar-collapse' : collapsed }"
     x-on:resize.window="resize()"
