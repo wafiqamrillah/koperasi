@@ -118,12 +118,12 @@
                                 <tr>
                                     @foreach($this->columns as $index => $column)
                                         @if($hideable === 'inline')
-                                            {{-- @include('datatables::header-inline-hide', ['column' => $column, 'sort' => $sort]) --}}
+                                            @include('datatables::header-inline-hide', ['column' => $column, 'sort' => $sort])
                                         @elseif($column['type'] === 'checkbox')
                                             @unless($column['hidden'])
-                                                <td>
+                                                <th>
                                                     <span class="badge badge-@if(count($selected)) warning @else default @endif">{{ count($visibleSelected) }}</span>
-                                                </td>
+                                                </th>
                                             @endunless
                                         @else
                                             @include('datatables::header-no-hide', ['column' => $column, 'sort' => $sort])
