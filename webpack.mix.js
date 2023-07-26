@@ -20,3 +20,9 @@ mix
         ],
         "public/js"
     );
+
+mix.browserSync('koperasi.test');
+
+if (mix.inProduction()) {
+    mix.version();
+}
