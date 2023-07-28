@@ -13,6 +13,10 @@
     </ul>
 
     <ul class="navbar-nav ml-auto">
+        <!-- Notification Menu -->
+        @livewire('system.navigation-bar.notification-menu')
+
+        <!-- User Menu -->
         <li class="nav-item dropdown user-menu" x-data="{ open: false }">
             <a href="javascript:void(0)" class="nav-link" x-on:click="open= true">
                 <img src="{{ auth()->user()->imageFile }}" class="user-image img-circle elevation-2" alt="User Image">

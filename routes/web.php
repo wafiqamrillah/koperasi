@@ -38,11 +38,17 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('profile')->name('profile')->group(function () {
         Route::get('/', [Controllers\Profile\UserController::class, 'index'])->name('.users.index');
+
+        Route::name('.')->group(function () {
+            // API Resource routes to notifications
+            Route::apiResource('notifications', Controllers\Profile\NotificationController::class)
+                ->only(['index', 'show']);
+        });
     });
 
     Route::middleware('authorization')->group(function () {
         Route::prefix('users')->name('users')->group(function () {
-            Route::get('/', Livewire\IndexUserComponent::class)->name('.index');
+            // Route::get('/', Livewire\IndexUserComponent::class)->name('.index');)
             Route::get('create', Livewire\CreateUserComponent::class)->name('.create');
             Route::get('{user}/edit', Livewire\EditUserComponent::class)->name('.edit');
         });
@@ -53,4 +59,6 @@ Route::middleware('auth')->group(function () {
             Route::get('{role}/edit', Livewire\EditRoleComponent::class)->name('.edit');
         });
     });
+
+    Route::resource('users', Controllers\Master\UserController::class)->only(['index']);
 });
